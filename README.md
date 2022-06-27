@@ -12,10 +12,12 @@ CODING STANDARDS
 Naming
 - Variables are to be named in lowerCamelCase
 - Objects are to be named in UpperCamelCase
+  - Attributes are to be names in lowerCamelCase
 - Functions are to be named in UpperCamelCase
 - Branches are to be named in UpperCamelCase
   - Branch name should be the feature name. Ex: FeatureName
 - Files follow Kebab naming method. Ex: This-is-kebab.js
+- 
 
 
 Documentation
