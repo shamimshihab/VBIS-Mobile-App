@@ -12,7 +12,7 @@ CODING STANDARDS
 Naming
 - Variables are to be named in lowerCamelCase
 - Objects are to be named in UpperCamelCase
-  - Attributes are to be names in lowerCamelCase
+  - Attributes are to be names in Snake_Case
 - Functions are to be named in UpperCamelCase
 - Branches are to be named in UpperCamelCase
   - Branch name should be the feature name. Ex: FeatureName
