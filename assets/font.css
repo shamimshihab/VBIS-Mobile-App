@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "OpenSans";
+    src: url("https://fonts.google.com/specimen/Open+Sans/OpenSans-Medium.ttf") format("truetype");
+    }
+.form-all * {
+    font-family: 'Open Sans', sans-serif;
+}

@@ -3,5 +3,5 @@ module.exports = {
         ios: {},
         android: {},
     },
-    assets: ['./VBIS-MOBILE-APP/assets/OpenSans']
+    assets: ['./assets/fonts/'],    // stay the same
 };
