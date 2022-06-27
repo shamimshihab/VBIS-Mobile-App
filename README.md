@@ -15,7 +15,7 @@ Naming
 - Functions are to be named in UpperCamelCase
 - Branches are to be named in UpperCamelCase
   - Branch name should be the feature name. Ex: FeatureName
-- Follows Kebab naming method. Ex: This-is-kebab.js
+- Files follow Kebab naming method. Ex: This-is-kebab.js
 
 
 Documentation
