@@ -4,7 +4,7 @@ A mobile app for the Victoria Brain Injury Society (VBIS) that presents all thei
 
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
-                      #CODING STANDARDS
+CODING STANDARDS
 ------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------
 
@@ -15,6 +15,7 @@ Naming
 - Functions are to be named in UpperCamelCase
 - Branches are to be named in UpperCamelCase
   - Branch name should be the feature name. Ex: FeatureName
+- Follows Kebab naming method. Ex: This-is-kebab.js
 
 
 Documentation
@@ -23,10 +24,6 @@ Documentation
     // Function description
     // Parameter A: Description of type and what it represents
     // Parameter B: ...
-
-File naming
-- Follows Kebab naming method. Ex: This-is-kebab.js
-
 
 Git Standards
 - All unstable code is to be pushed to a branch and reviewed by at least 1 peer before merging
