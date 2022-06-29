@@ -6,8 +6,11 @@ import { StyleSheet, Text, View, Button, Alert, Pressable, Image } from 'react-n
 import { Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import About from "./Components/AboutVBIS.js";
+import Programs from "./Components/Program.js";
+import My_Schedule from './Components/MySchedule.js';
 
-function HomePage({navigation}) {
+function HomePage({navigation}){
   //const { onPress, title = 'Save' } = props;
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = query => setSearchQuery(query);
@@ -110,88 +113,32 @@ function HomePage({navigation}) {
   );
 }
 
-function AboutVBIS({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('ABOUT_VBIS')}
-      />
-    </View>
-  );
+const AboutVBIS = ({ navigation }) => {
+  return <About navigation={navigation}/>;
 }
 
-function Program({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('PROGRAMS')}
-      />
-    </View>
-  );
+const Program = ({ navigation }) => {
+  return <Programs navigation={navigation}/>;
 }
 
-function MySchedule({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('MY_SCHEDULE')}
-      />
-    </View>
-  );
+const MySchedule = ({ navigation }) => {
+  return <My_Schedule navigation={navigation}/>;
 }
 
-function VBISSchedule({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('VBIS_SCHEDULE')}
-      />
-    </View>
-  );
+const VBISSchedule = ({ navigation }) => {
+  return <VBIS_Schedule navigation={navigation}/>;
 }
 
-function OtherResources({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('RESOURCES')}
-      />
-    </View>
-  );
+const OtherResources = ({ navigation }) => {
+  return <Other_Resources navigation={navigation}/>;
 }
 
-function Newsletter({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('NEWSLETTER')}
-      />
-    </View>
-  );
+const Newsletter = ({ navigation }) => {
+  return <Newsletters navigation={navigation}/>;
 }
 
-function Setting({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.navigate('SETTINGS')}
-      />
-    </View>
-  );
+const Setting = ({ navigation }) => {
+  return <Settings navigation={navigation}/>;
 }
 
 
