@@ -11,14 +11,17 @@ CODING STANDARDS
 
 Naming
 - Variables are to be named in lowerCamelCase
-- Objects are to be named in UpperCamelCase
-  - Attributes are to be names in Snake_Case
+- Constants are to be names in SCREAMING_SNAKE_CASE
+- Class are to be named in UpperCamelCase
+  - Attributes are to be names in snake_case
 - Functions are to be named in UpperCamelCase
 - Branches are to be named in UpperCamelCase
   - Branch name should be the feature name. Ex: FeatureName
 - Files follow Kebab naming method. Ex: This-is-kebab.js
-- 
 
+Organization
+- All pages should be their own javascript file
+- CSS should be on it's own file
 
 Documentation
 - Each function has a comment above the script following this format:
