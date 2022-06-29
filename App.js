@@ -6,6 +6,9 @@ import { StyleSheet, Text, View, Button, Alert, Pressable, Image } from 'react-n
 import { Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+//import database from '@react-native-firebase/database';
+
+//const reference = database().ref('https://console.firebase.google.com/u/0/project/vbis-test/database/vbis-test-default-rtdb/data/~2F');
 
 function HomePage({navigation}) {
   //const { onPress, title = 'Save' } = props;
@@ -126,6 +129,7 @@ function Program({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
+      <Text>{reference.once('value').val()}</Text>
       <Button
         title="Go to Details... again"
         onPress={() => navigation.navigate('PROGRAMS')}
