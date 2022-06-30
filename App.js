@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import About from "./Components/AboutVBIS.js";
 import Programs from "./Components/Program.js";
 import My_Schedule from './Components/MySchedule.js';
+//import db from './firebase-config.js';
 
 function HomePage({navigation}){
   //const { onPress, title = 'Save' } = props;
