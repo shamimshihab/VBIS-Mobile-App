@@ -7,7 +7,7 @@ import { configureFonts, Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import { database, ref } from '@react-native-firebase/database';
-import { getDatabase, ref, get, child, val, once, toJSON } from 'firebase/database';
+import { getDatabase, ref, get, child, val, once, toJSON, toString } from 'firebase/database';
 import db from '../firebase-config.js';
 console.log('made it thru imports');
 
@@ -62,14 +62,14 @@ let data1 = [];
 });*/
 get(programsRef).then(snapshot => {
   snapshot.forEach(item => {
-    const temp = item.val().name;
+    //const temp = item.val().name;
+    const temp = item;
     data1.push(temp);
-    return false;
+    //return false;
   })
 });
 console.log(data1);
-const word = data1[0];
-const list = [1, 2, 3, 4];
+const list = ['1', '2', '3', '4'];
 
 const Programs = ({ navigation }) => {
     return (
@@ -79,21 +79,11 @@ const Programs = ({ navigation }) => {
           title="Go to Details... again"
           onPress={() => navigation.navigate('PROGRAMS')}
         />
-        <Text>Program list</Text>
-        <Text>{word}</Text>
-        <Text>{ data1.forEach(value => {return value}) }</Text>
-        {data1.forEach((item) => {
-          <Text>
-            { item }
-            { '/n' }
-          </Text>
-        })}
-        {list.forEach((item) => {
-          <Text>
-            { item }
-            { '/n' }
-          </Text>
-        })}
+        <Text>Program list:</Text>
+        {data1.map((item) =>
+          <Text key={item.key}>
+            { item.val().name }
+          </Text>)}
 
       </View>
     );
