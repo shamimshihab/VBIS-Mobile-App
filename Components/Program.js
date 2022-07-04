@@ -81,9 +81,12 @@ const Programs = ({ navigation }) => {
         />
         <Text>Program list:</Text>
         {data1.map((item) =>
-          <Text key={item.key}>
-            { item.val().name }
-          </Text>)}
+          <View key={item.key}>
+            <Pressable>
+              <Text>{ item.val().name }</Text>
+            </Pressable>
+          </View>
+        )}
 
       </View>
     );
