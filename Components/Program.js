@@ -13,10 +13,11 @@ console.log('made it thru imports');
 
 //const programsRef = ref(db, '/programs');
 //const programsRef = ref(db);
-const programsRef = ref(getDatabase());
+//const programsRef = ref(getDatabase());
+const programsRef = ref(getDatabase(), 'programs');
 //const programsRef = firebase.database().ref('/programs');
 //const writeprograms = get(child(programsRef, 'abi101/name')).val();
-let prog = get(child(programsRef, 'programs/abi101/name'))
+let prog = get(child(programsRef, 'abi101/name'))
     .then((snapshot) => {
       console.log(snapshot.val())
       return snapshot.val()
@@ -25,7 +26,7 @@ let prog = get(child(programsRef, 'programs/abi101/name'))
       return result;
     });
 console.log("found abi101");
-const abi = child(programsRef, 'programs/abi101').toJSON();
+const abi = child(programsRef, 'abi101').toJSON();
 console.log(abi);
 console.log(abi.name);
 console.log("did it work?");
@@ -52,14 +53,23 @@ let data1 = [];
       return false;
   })
 });*/
-get(child(programsRef, 'programs')).then(snapshot => {
+/*get(child(programsRef, 'programs')).then(snapshot => {
   snapshot.forEach(item => {
       const temp = item.val().name;
       data1.push(temp);
       return false;
   })
+});*/
+get(programsRef).then(snapshot => {
+  snapshot.forEach(item => {
+    const temp = item.val().name;
+    data1.push(temp);
+    return false;
+  })
 });
 console.log(data1);
+const word = data1[0];
+const list = [1, 2, 3, 4];
 
 const Programs = ({ navigation }) => {
     return (
@@ -70,7 +80,7 @@ const Programs = ({ navigation }) => {
           onPress={() => navigation.navigate('PROGRAMS')}
         />
         <Text>Program list</Text>
-        <Text>hello</Text>
+        <Text>{word}</Text>
         <Text>{ data1.forEach(value => {return value}) }</Text>
         {data1.forEach((item) => {
           <Text>
@@ -78,6 +88,13 @@ const Programs = ({ navigation }) => {
             { '/n' }
           </Text>
         })}
+        {list.forEach((item) => {
+          <Text>
+            { item }
+            { '/n' }
+          </Text>
+        })}
+
       </View>
     );
   }
