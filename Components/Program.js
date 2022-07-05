@@ -62,7 +62,7 @@ const Programs = ({ navigation }) => {
         />
         <Text>Program list:</Text>
         {data1.map((item) =>
-          <View key={item.key}>
+          <View key={item.key} style={{ alignItems:'left' }}>
             <Pressable>
               <Text>{ item.val().name }</Text>
             </Pressable>
