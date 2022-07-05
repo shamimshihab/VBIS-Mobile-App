@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import About from "./Components/AboutVBIS.js";
 import Programs from "./Components/Program.js";
 import My_Schedule from './Components/MySchedule.js';
+import COURSES from "./Components/Course.js";
 
 function HomePage({navigation}){
   //const { onPress, title = 'Save' } = props;
@@ -141,6 +142,10 @@ const Setting = ({ navigation }) => {
   return <Settings navigation={navigation}/>;
 }
 
+const Course = ({ navigation }) => {
+  return <COURSES navigation={navigation}/>;
+}
+
 
 const Stack = createNativeStackNavigator();
 
@@ -156,6 +161,7 @@ function App() {
         <Stack.Screen name="RESOURCES" component={OtherResources} />
         <Stack.Screen name="NEWSLETTER" component={Newsletter} />
         <Stack.Screen name="SETTINGS" component={Setting} />
+        <Stack.Screen name="COURSES" component={Course} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, Button, Alert, Pressable, Image } from 'react-n
 import { Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Course from "./Components/Course.js";
 
 const Programs = ({ navigation }) => {
     return (
