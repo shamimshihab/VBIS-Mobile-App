@@ -6,6 +6,16 @@ import { StyleSheet, Text, View, Button, Alert, Pressable, Image } from 'react-n
 import { Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { getDatabase, ref, get, child } from 'firebase/database';
+import db from '../firebase-config.js';
+
+const aboutRef = ref(getDatabase(), 'about');
+
+let about = null;
+
+get(child(aboutRef, 'aboutVBIS')).then(snapshot => {
+  about = snapshot.val();
+});
 
 const About = ({ navigation }) => {
     return (
@@ -15,6 +25,7 @@ const About = ({ navigation }) => {
           title="Go to Details... again"
           onPress={() => navigation.navigate('ABOUT_VBIS')}
         />
+        <Text>{about}</Text>
       </View>
     );
 }
