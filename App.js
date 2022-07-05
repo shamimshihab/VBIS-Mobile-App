@@ -10,6 +10,10 @@ import About from "./Components/AboutVBIS.js";
 import Programs from "./Components/Program.js";
 import My_Schedule from './Components/MySchedule.js';
 import COURSES from "./Components/Course.js";
+import VBIS_Schedule from './Components/VBISSchedule.js';
+import Newsletters from './Components/Newsletter.js';
+import Settings from './Components/Setting.js';
+import Other_Resources from './Components/OtherResources.js';
 
 function HomePage({navigation}){
   //const { onPress, title = 'Save' } = props;
