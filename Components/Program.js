@@ -9,7 +9,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import { database, ref } from '@react-native-firebase/database';
 import { getDatabase, ref, get, child, val, once, toJSON, toString } from 'firebase/database';
 import db from '../firebase-config.js';
-console.log('made it thru imports');
 
 //const programsRef = ref(db, '/programs');
 //const programsRef = ref(db);
@@ -25,17 +24,8 @@ let prog = get(child(programsRef, 'abi101/name'))
     .then((result) => {
       return result;
     });
-console.log("found abi101");
-const abi = child(programsRef, 'abi101').toJSON();
-console.log(abi);
-console.log(abi.name);
-console.log("did it work?");
 
 console.log(prog);
-/*const prog1 = get(child(programsRef, 'programs/abi101/name'))
-      .then((snapshot) => { return snapshot.val() })
-      .catch((error) => console.log(error));
-console.log(prog1);*/
 
 /*const prog1 = child(programsRef, 'programs/abi101/name')
       .once('value', (snapshot) => {
@@ -43,17 +33,9 @@ console.log(prog1);*/
 });
 console.log(prog1);*/
 
-//console.log(writeprograms);
 let data1 = [];
 
 /*child(programsRef, 'programs').once('value').then(snapshot => {
-  snapshot.forEach(item => {
-      const temp = item.val().name;
-      data1.push(temp);
-      return false;
-  })
-});*/
-/*get(child(programsRef, 'programs')).then(snapshot => {
   snapshot.forEach(item => {
       const temp = item.val().name;
       data1.push(temp);
@@ -65,7 +47,6 @@ get(programsRef).then(snapshot => {
     //const temp = item.val().name;
     const temp = item;
     data1.push(temp);
-    //return false;
   })
 });
 console.log(data1);
@@ -91,7 +72,5 @@ const Programs = ({ navigation }) => {
       </View>
     );
   }
-  //{programsRef.once('value').val()}
-//<Text>{ prog1 }</Text>
 
 export default Programs;
