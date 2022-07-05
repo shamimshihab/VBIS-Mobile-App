@@ -151,7 +151,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
         <Stack.Screen name="HOME" component={HomePage} />
         <Stack.Screen name="ABOUT_VBIS" component={AboutVBIS} />
         <Stack.Screen name="PROGRAMS" component={Program} />
