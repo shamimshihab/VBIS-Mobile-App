@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Pressable } from 'react-native';
 import { getDatabase, ref, get, child, val } from 'firebase/database';
 import db from '../firebase-config.js';
 
@@ -20,6 +20,13 @@ const Programs = ({ navigation }) => {
           title="Back"
           onPress={() => navigation.goBack()}
         />
+        {programList.map((item) =>
+          <View key={item.key}>
+            <Pressable>
+              <Text>{ item.val().name }</Text>
+            </Pressable>
+          </View>
+        )}
       </View>
     );
   }
