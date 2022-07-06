@@ -7,12 +7,13 @@ import { Searchbar } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+function Course ({navigation, route}){
+  const {ID, name} = route.params;
 
-const Course = ({navigation}) => {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Hello User</Text>
-
+        <Text>Hello User, Welcome to {name}</Text>
+        <Button title="Go Home" onPress={() => navigation.navigate('HOME')}/>
       </View>
     );
 }

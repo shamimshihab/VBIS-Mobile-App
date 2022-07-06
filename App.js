@@ -146,11 +146,6 @@ const Setting = ({ navigation }) => {
   return <Settings navigation={navigation}/>;
 }
 
-const Courses = ({navigation}) => {
-  return <Course navigation={navigation}/>;
-}
-
-
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -165,7 +160,7 @@ function App() {
         <Stack.Screen name="RESOURCES" component={OtherResources} />
         <Stack.Screen name="NEWSLETTER" component={Newsletter} />
         <Stack.Screen name="SETTINGS" component={Setting} />
-        <Stack.Screen name="COURSE" component={Courses} />
+        <Stack.Screen name="COURSE" component={Course} />
       </Stack.Navigator>
     </NavigationContainer>
   );

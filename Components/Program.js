@@ -8,8 +8,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Drawer } from 'react-native-paper';
 import { watchPositionAsync } from 'exponent/src/Location';
 import { NavigationEvents, TabRouter } from 'react-navigation';
-import Course from './Course';
 
+
+// A possible way of creating courses. 
+// Component names CourseName which only handles the name of the course. this name prop would then be passed along.
+// However, this seems to break stuff......... Need more research on how to use the navigate and how to pass the navigation address to a component...like passing a variable?
 // const CourseName = (props) => {
 //   return(
 //     <View style={{
@@ -19,17 +22,17 @@ import Course from './Course';
 //       backgroundColor: '#ffffff',
 //       alignItems: 'center',
 //       justifyContent: 'center',}}>
-//         <Pressable onPress={() => pressFunction(props.name)}>
+//         <Pressable onPress={() => navigation.navigate(props.title)>
 //           <Text>Course name: {props.name}</Text>
 //         </Pressable>
 //       </View>
 //   );
 
-//   function pressFunction(e){
-//     console.log(e);
-//     navigation.navigate('COURSES');
-//   }
-// }
+// //   function pressFunction(e){
+// //     console.log(e);
+// //     ;
+// //   }
+//  }
 
 const Programs = ({navigation}) => {
 
@@ -37,14 +40,14 @@ const Programs = ({navigation}) => {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Program list here</Text>
 
-        {// Making nested pages is as simple as creating this onPress prop and making it navigate to 'HERE'}
         <Button 
           title="ABI 101" 
-          onPress={() => navigation.navigate('COURSE')}
+          onPress={() => navigation.navigate('COURSE', {
+            ID: 1,
+            name: 'ABI 101',
+          })}
         />
-
-
-
+        
         {/* <CourseName name='ABI 101'/>
         <CourseName name='ABI 102'/>
         <CourseName name='ABI 103'/>
