@@ -8,13 +8,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const COURSES = ({navigation}) => {
+const Course = ({navigation}) => {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Sup Fucker</Text>
+        <Text>Hello User</Text>
 
       </View>
     );
 }
 
-export default COURSES;
+export default Course;
