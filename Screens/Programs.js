@@ -12,6 +12,8 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { db } from '../firebase-config.js';
+import { getDatabase, ref, get, child } from 'firebase/database';
 
 function Programs({ navigation }) {
   return (
