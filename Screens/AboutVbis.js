@@ -9,11 +9,21 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import TopHeader from "../Componenets/TopHeader";
+import TopHeader from "../Components/TopHeader";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { db } from '../firebase-config.js';
+import { getDatabase, ref, get, child } from 'firebase/database';
+
+const aboutRef = ref(getDatabase(), 'about');
+
+let about = null;
+
+get(child(aboutRef, 'aboutVBIS')).then(snapshot => {
+  about = snapshot.val();
+});
 
 function AboutVbis({ navigation }) {
   return (
@@ -39,7 +49,7 @@ function AboutVbis({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -49,11 +59,7 @@ function AboutVbis({ navigation }) {
         <View>
           <Text style={styles.heading}>About VBIS</Text>
           <Text style={styles.bodyText}>
-            The Victoria Brain Injury Society (VBIS) is a not-for-profit
-            organization that offers free-ofcharge programs and services, and
-            whose mission is to support, educate, and advocate for adults with
-            acquired brain injuries and their families; and to increase
-            community awareness about acquired brain injuries.
+            {about}
           </Text>
         </View>
       </View>
