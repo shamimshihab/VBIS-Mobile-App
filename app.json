@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "VBIS-Mobile-App",
-    "slug": "VBIS-Mobile-App",
+    "name": "navigator",
+    "slug": "navigator",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
