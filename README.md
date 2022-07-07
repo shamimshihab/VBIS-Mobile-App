@@ -1,5 +1,8 @@
 # VBIS-Mobile-App
-A mobile app for the Victoria Brain Injury Society (VBIS) that presents all their information in an Acquired Brain Injury (ABI) friendly way!
+A mobile app for the Victoria Brain Injury Society ([VBIS](https://vbis.ca/)) that presents all their information in an acquired brain injury (ABI) friendly way!
+
+## VBIS
+> VBIS is a not-for-profit organization that offers free-of-charge programs and services, and whose mission is to support, educate, and advocate for adults with acquired brain injuries and their families; and to increase community awareness about acquired brain injuries.
 
 ## CODING STANDARDS
 
