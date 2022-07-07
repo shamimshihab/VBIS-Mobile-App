@@ -37,7 +37,7 @@ function MySchedule({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>

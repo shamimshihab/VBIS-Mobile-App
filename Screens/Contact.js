@@ -47,7 +47,7 @@ function Contact({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.bouttonText}> Tutorial </Text>
         </Pressable>

@@ -12,7 +12,7 @@ import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Contact from "./Screens/Contact";
 import AboutVbis from "./Screens/AboutVbis";
-import TopHeader from "./Componenets/TopHeader";
+import TopHeader from "./Components/TopHeader";
 import Programs from "./Screens/Programs";
 import MySchedule from "./Screens/MySchedule";
 import VbisSchedule from "./Screens/VbisSchedule";
