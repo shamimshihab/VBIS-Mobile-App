@@ -15,6 +15,16 @@ import { Entypo } from "@expo/vector-icons";
 import { db } from '../firebase-config.js';
 import { getDatabase, ref, get, child } from 'firebase/database';
 
+const programsRef = ref(getDatabase(), 'programs');
+
+let programList = [];
+get(programsRef).then(snapshot => {
+  snapshot.forEach(item => {
+    const temp = item;
+    programList.push(temp);
+  })
+});
+
 function Programs({ navigation }) {
   return (
     <View style={styles.appContainer}>
@@ -39,7 +49,7 @@ function Programs({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -48,7 +58,14 @@ function Programs({ navigation }) {
       <View style={styles.middleContainer}>
         <View>
           <Text style={styles.heading}> Programs </Text>
-          <Text style={styles.bodyText}>1. 2.</Text>
+          
+          {programList.map((item) =>
+          <View key={item.key}>
+            <Pressable>
+              <Text style={styles.bodyText}>{ item.val().name }</Text>
+            </Pressable>
+          </View>
+        )}
         </View>
       </View>
 
