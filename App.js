@@ -19,7 +19,7 @@ import VbisSchedule from "./Screens/VbisSchedule";
 import News from "./Screens/News";
 import OtherResources from "./Screens/OtherResources";
 import Settings from "./Screens/Settings";
-import Tuitorial from "./Screens/Tuitorial";
+import Tutorial from "./Screens/Tutorial";
 
 import { Searchbar } from "react-native-paper";
 
@@ -60,7 +60,7 @@ function HomeScreen({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Settings")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -162,7 +162,7 @@ function App() {
         <Stack.Screen name="News" component={News} />
         <Stack.Screen name="OtherResources" component={OtherResources} />
         <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="Tuitorial" component={Tuitorial} />
+        <Stack.Screen name="Tutorial" component={Tutorial} />
       </Stack.Navigator>
     </NavigationContainer>
   );

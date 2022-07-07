@@ -19,6 +19,10 @@ Naming
   - Branch name should be the feature name. Ex: FeatureName
 - Files follow Kebab naming method. Ex: This-is-kebab.js
 
+Running
+- To run it, use expo start --tunnel
+- If you got this error, Unable to find expo in this project - have you run yarn / npm install yet?, please try npm install or yarn install, and then use expo start --tunnel to run the code.
+
 Organization
 - All pages should be their own javascript file
 - CSS should be on it's own file
