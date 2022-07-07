@@ -15,7 +15,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { db } from '../firebase-config.js';
-import { getDatabase, ref, get, child, val } from ''
+import { getDatabase, ref, get, child } from 'firebase/database';
 
 function AboutVbis({ navigation }) {
   return (
@@ -41,7 +41,7 @@ function AboutVbis({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
