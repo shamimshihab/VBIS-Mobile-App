@@ -1,13 +1,7 @@
 # VBIS-Mobile-App
 A mobile app for the Victoria Brain Injury Society (VBIS) that presents all their information in an Acquired Brain Injury (ABI) friendly way!
 
-
-------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------
-CODING STANDARDS
-------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------
-
+## CODING STANDARDS
 
 Naming
 - Variables are to be named in lowerCamelCase
@@ -20,19 +14,23 @@ Naming
 - Files follow Kebab naming method. Ex: This-is-kebab.js
 
 Running
-- To run it, use expo start --tunnel
-- If you got this error, Unable to find expo in this project - have you run yarn / npm install yet?, please try npm install or yarn install, and then use expo start --tunnel to run the code.
+- To run it, use `expo start --tunnel`
+- If you got this error, Unable to find expo in this project - have you run yarn / npm install yet?, please try `npm install` or `yarn install`, and then use `expo start --tunnel` to run the code.
 
 Organization
-- All pages should be their own javascript file
+- All screens should be their own javascript file under the Screens folder
 - CSS should be on it's own file
 
 Documentation
-- Each function has a comment above the script following this format:
-    // Function name
-    // Function description
-    // Parameter A: Description of type and what it represents
-    // Parameter B: ...
+- Each function should have a commented description above it following this format:
+```
+/*
+NameOfFunction
+Function description
+Parameter A: type, description of parameter
+Parameter B: ...
+*/
+```
 
 Git Standards
 - All unstable code is to be pushed to a branch and reviewed by at least 1 peer before merging
