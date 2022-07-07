@@ -9,7 +9,7 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import TopHeader from "../Componenets/TopHeader";
+import TopHeader from "../Components/TopHeader";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
