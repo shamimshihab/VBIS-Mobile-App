@@ -14,6 +14,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { db } from '../firebase-config.js';
+import { getDatabase, ref, get, child, val } from ''
 
 function AboutVbis({ navigation }) {
   return (
