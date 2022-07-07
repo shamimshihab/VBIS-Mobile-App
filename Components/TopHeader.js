@@ -28,7 +28,7 @@ function TopHeader() {
 
         <View style={styles.tutorial}>
           <Pressable color="#f194ff" onPress={() => Alert.alert("TUTORIAL")}>
-            <Text style={styles.buttonText}> Tuitorial </Text>
+            <Text style={styles.buttonText}> Tutorial </Text>
           </Pressable>
         </View>
       </View>
