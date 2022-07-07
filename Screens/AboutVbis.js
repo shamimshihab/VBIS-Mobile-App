@@ -17,6 +17,14 @@ import { Entypo } from "@expo/vector-icons";
 import { db } from '../firebase-config.js';
 import { getDatabase, ref, get, child } from 'firebase/database';
 
+const aboutRef = ref(getDatabase(), 'about');
+
+let about = null;
+
+get(child(aboutRef, 'aboutVBIS')).then(snapshot => {
+  about = snapshot.val();
+});
+
 function AboutVbis({ navigation }) {
   return (
     <View style={styles.appContainer}>
@@ -51,11 +59,7 @@ function AboutVbis({ navigation }) {
         <View>
           <Text style={styles.heading}>About VBIS</Text>
           <Text style={styles.bodyText}>
-            The Victoria Brain Injury Society (VBIS) is a not-for-profit
-            organization that offers free-ofcharge programs and services, and
-            whose mission is to support, educate, and advocate for adults with
-            acquired brain injuries and their families; and to increase
-            community awareness about acquired brain injuries.
+            {about}
           </Text>
         </View>
       </View>
