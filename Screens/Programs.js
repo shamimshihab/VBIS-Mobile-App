@@ -17,10 +17,19 @@ import { getDatabase, ref, get, child } from 'firebase/database';
 
 const programsRef = ref(getDatabase(), 'programs');
 
+class Program {
+  constructor(name, description, inperson, online){
+    this.name = name;
+    this.description = description;
+    this.inperson = inperson;
+    this.online = online;
+  }
+}
+
 let programList = [];
 get(programsRef).then(snapshot => {
   snapshot.forEach(item => {
-    const temp = item;
+    const temp = new Program(item.val().name, item.val().description, item.val().inperson, item.val().online);
     programList.push(temp);
   })
 });
@@ -60,15 +69,11 @@ function Programs({ navigation }) {
           <Text style={styles.heading}> Programs </Text>
           
           {programList.map((item) =>
-          <View key={item.key}>
+            <View key={item.name}>
             <Pressable onPress={() => navigation.navigate('COURSE', {
-              //Insert here any parameters that should be passed to the nested page.
-              ID: item.key, //Passing only the key should be enough. Have not tested this yet!
+              ID: item.name,
             })}>
-            {console.log(item)}
-            {console.log(item.key)}
-            {console.log(item.val().name)}
-              <Text style={styles.bodyText}>{ item.val().name }</Text>
+              <Text style={styles.bodyText}>{ item.name }</Text>
             </Pressable>
           </View>
         )}
