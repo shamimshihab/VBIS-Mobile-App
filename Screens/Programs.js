@@ -70,7 +70,9 @@ function Programs({ navigation }) {
           
           {programList.map((item) =>
             <View key={item.name}>
-            <Pressable onPress={() => {console.log(item.name);}}>
+            <Pressable onPress={() => navigation.navigate('COURSE', {
+              ID: item.name,
+            })}>
               <Text style={styles.bodyText}>{ item.name }</Text>
             </Pressable>
           </View>
