@@ -21,7 +21,6 @@ const contactRef = ref(getDatabase(), 'contact');
 let { address, email, hours, phone } = '';
 
 get(contactRef).then(snapshot => {
-  console.log(snapshot.val());
   address = snapshot.val().address;
   email = snapshot.val().email;
   hours = snapshot.val().hours;
