@@ -20,6 +20,7 @@ import News from "./Screens/News";
 import OtherResources from "./Screens/OtherResources";
 import Settings from "./Screens/Settings";
 import Tutorial from "./Screens/Tutorial";
+import Course from "./Screens/Course.js";
 
 import { Searchbar } from "react-native-paper";
 
@@ -148,7 +149,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="HomeScrren"
+        initialRouteName="HomeScreen"
         screenOptions={{
           headerShown: false,
         }}
@@ -163,6 +164,7 @@ function App() {
         <Stack.Screen name="OtherResources" component={OtherResources} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Tutorial" component={Tutorial} />
+        <Stack.Screen name="COURSE" component={Course} />
       </Stack.Navigator>
     </NavigationContainer>
   );

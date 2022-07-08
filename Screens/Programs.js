@@ -61,7 +61,13 @@ function Programs({ navigation }) {
           
           {programList.map((item) =>
           <View key={item.key}>
-            <Pressable>
+            <Pressable onPress={() => navigation.navigate('COURSE', {
+              //Insert here any parameters that should be passed to the nested page.
+              ID: item.key, //Passing only the key should be enough. Have not tested this yet!
+            })}>
+            {console.log(item)}
+            {console.log(item.key)}
+            {console.log(item.val().name)}
               <Text style={styles.bodyText}>{ item.val().name }</Text>
             </Pressable>
           </View>
