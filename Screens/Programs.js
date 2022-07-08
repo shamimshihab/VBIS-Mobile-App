@@ -17,10 +17,19 @@ import { getDatabase, ref, get, child } from 'firebase/database';
 
 const programsRef = ref(getDatabase(), 'programs');
 
+class Program {
+  constructor(name, description, inperson, online){
+    this.name = name;
+    this.description = description;
+    this.inperson = inperson;
+    this.online = online;
+  }
+}
+
 let programList = [];
 get(programsRef).then(snapshot => {
   snapshot.forEach(item => {
-    const temp = item;
+    const temp = new Program(item.val().name, item.val().description, item.val().inperson, item.val().online);
     programList.push(temp);
   })
 });
@@ -60,9 +69,9 @@ function Programs({ navigation }) {
           <Text style={styles.heading}> Programs </Text>
           
           {programList.map((item) =>
-          <View key={item.key}>
-            <Pressable>
-              <Text style={styles.bodyText}>{ item.val().name }</Text>
+            <View key={item.name}>
+            <Pressable onPress={() => {console.log(item.name);}}>
+              <Text style={styles.bodyText}>{ item.name }</Text>
             </Pressable>
           </View>
         )}
