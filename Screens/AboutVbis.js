@@ -14,14 +14,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { db } from '../firebase-config.js';
-import { getDatabase, ref, get, child } from 'firebase/database';
+import { db } from "../firebase-config.js";
+import { getDatabase, ref, get, child } from "firebase/database";
+import Staff from "./Staff";
 
-const aboutRef = ref(getDatabase(), 'about');
+const aboutRef = ref(getDatabase(), "about");
 
 let about = null;
 
-get(child(aboutRef, 'aboutVBIS')).then(snapshot => {
+get(child(aboutRef, "aboutVBIS")).then((snapshot) => {
   about = snapshot.val();
 });
 
@@ -58,9 +59,16 @@ function AboutVbis({ navigation }) {
       <View style={styles.middleContainer}>
         <View>
           <Text style={styles.heading}>About VBIS</Text>
-          <Text style={styles.bodyText}>
-            {about}
-          </Text>
+          <Text style={styles.bodyText}>{about}</Text>
+
+          <View>
+            <Pressable
+              onPress={() => navigation.navigate("Staff")}
+              style={styles.staffButton}
+            >
+              <Text style={styles.buttonText}> Staff Members </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
 
@@ -181,6 +189,22 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: "bold",
     color: "#000000",
+  },
+
+  staffButton: {
+    marginTop: 30,
+    marginRight: 30,
+    marginLeft: 30,
+
+    width: 300,
+    height: 62,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
   },
 
   /*Bottom */

@@ -12,34 +12,8 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child } from "firebase/database";
 
-const programsRef = ref(getDatabase(), "programs");
-
-class Program {
-  constructor(name, description, inperson, online) {
-    this.name = name;
-    this.description = description;
-    this.inperson = inperson;
-    this.online = online;
-  }
-}
-
-let programList = [];
-get(programsRef).then((snapshot) => {
-  snapshot.forEach((item) => {
-    const temp = new Program(
-      item.val().name,
-      item.val().description,
-      item.val().inperson,
-      item.val().online
-    );
-    programList.push(temp);
-  });
-});
-
-function Programs({ navigation }) {
+function Staff({ navigation }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.headerContainer}>
@@ -63,7 +37,7 @@ function Programs({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
+          onPress={() => navigation.navigate("Tuitorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -71,21 +45,32 @@ function Programs({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Programs </Text>
+          <Text style={styles.heading}> Staff Members</Text>
 
-          {programList.map((item) => (
-            <View key={item.name}>
-              <Pressable
-                onPress={() =>
-                  navigation.navigate("COURSE", {
-                    ID: item.name,
-                  })
-                }
-              >
-                <Text style={styles.bodyText}>{item.name}</Text>
-              </Pressable>
-            </View>
-          ))}
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Board of Directors: </Text>
+            <Text>Oversee all major VBIS initiatives. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Case Managers: </Text>
+            <Text>Offer one-on-one support to VBIS clients. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • InReach Team: </Text>
+            <Text>Take in new VBIS clients. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Coordinators: </Text>
+            <Text>Manage and direct all operations and programs. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Volunteers: </Text>
+            <Text>Frontline workers at VBIS. </Text>
+          </Text>
         </View>
       </View>
 
@@ -113,7 +98,7 @@ function Programs({ navigation }) {
   );
 }
 
-export default Programs;
+export default Staff;
 
 const styles = StyleSheet.create({
   appContainer: {
@@ -194,9 +179,9 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 20,
 
-    textAlign: "center",
-    padding: 10,
-    fontWeight: "bold",
+    textAlign: "left",
+    padding: 4,
+
     color: "#000000",
   },
 

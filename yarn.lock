@@ -4155,11 +4155,6 @@
   dependencies:
     "safer-buffer" ">= 2.1.2 < 3"
 
-"idb@7.0.1":
-  "integrity" "sha512-UUxlE7vGWK5RfB/fDwEGgRf84DY/ieqNha6msMV99UsEMQhJ1RwbCd8AYBj3QMgnE3VZnfQvm4oKVCJTYlqIgg=="
-  "resolved" "https://registry.npmjs.org/idb/-/idb-7.0.1.tgz"
-  "version" "7.0.1"
-
 "ieee754@^1.1.13":
   "integrity" "sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA=="
   "resolved" "https://registry.npmjs.org/ieee754/-/ieee754-1.2.1.tgz"
@@ -6791,7 +6786,7 @@
   "resolved" "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz"
   "version" "6.0.1"
   dependencies:
-    "ansi-regex" "^5.0.1"
+    "has-flag" "^4.0.0"
 
 "strip-eof@^1.0.0":
   "integrity" "sha512-7FCwGGmx8mD5xQd3RPUvnSpUXHM3BWuzjtpD4TXsfcZ9EL4azvVVUscFYwD9nx8Kh+uCBC00XBtAykoMHwTh8Q=="
