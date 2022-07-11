@@ -3,11 +3,12 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Button,
   Alert,
   Pressable,
   Image,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
@@ -73,19 +74,23 @@ function Programs({ navigation }) {
         <View>
           <Text style={styles.heading}> Programs </Text>
 
-          {programList.map((item) => (
-            <View key={item.name}>
-              <Pressable
-                onPress={() =>
-                  navigation.navigate("COURSE", {
-                    ID: item.name,
-                  })
-                }
-              >
-                <Text style={styles.bodyText}>{item.name}</Text>
-              </Pressable>
-            </View>
-          ))}
+          <SafeAreaView>
+            <ScrollView style={styles.scrollView}>
+              {programList.map((item) => (
+                <View key={item.name}>
+                  <Pressable
+                    onPress={() =>
+                      navigation.navigate("COURSE", {
+                        ID: item.name,
+                      })
+                    }
+                  >
+                    <Text style={styles.bodyText}>{item.name}</Text>
+                  </Pressable>
+                </View>
+              ))}
+            </ScrollView>
+          </SafeAreaView>
         </View>
       </View>
 
@@ -176,11 +181,14 @@ const styles = StyleSheet.create({
   middleContainer: {
     flexDirection: "column",
 
-    height: "70%",
+    height: 500,
 
     justifyContent: "space-between",
   },
 
+  scrollView: {
+    height: 500,
+  },
   heading: {
     alignItems: "center",
     fontSize: 30,
@@ -212,7 +220,7 @@ const styles = StyleSheet.create({
   /*Bottom */
   bottomContainer: {
     flexDirection: "row",
-    height: "15%",
+    height: 200,
 
     backgroundColor: "",
     alignItems: "center",
