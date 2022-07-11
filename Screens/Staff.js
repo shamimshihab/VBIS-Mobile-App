@@ -9,24 +9,11 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import TopHeader from "../Components/TopHeader";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child } from "firebase/database";
-import Staff from "./Staff";
 
-const aboutRef = ref(getDatabase(), "about");
-
-let about = null;
-
-get(child(aboutRef, "aboutVBIS")).then((snapshot) => {
-  about = snapshot.val();
-});
-
-function AboutVbis({ navigation }) {
+function Staff({ navigation }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.headerContainer}>
@@ -50,7 +37,7 @@ function AboutVbis({ navigation }) {
         <Pressable
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
+          onPress={() => navigation.navigate("Tuitorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -58,17 +45,32 @@ function AboutVbis({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}>About VBIS</Text>
-          <Text style={styles.bodyText}>{about}</Text>
+          <Text style={styles.heading}> Staff Members</Text>
 
-          <View>
-            <Pressable
-              onPress={() => navigation.navigate("Staff")}
-              style={styles.staffButton}
-            >
-              <Text style={styles.buttonText}> Staff Members </Text>
-            </Pressable>
-          </View>
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Board of Directors: </Text>
+            <Text>Oversee all major VBIS initiatives. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Case Managers: </Text>
+            <Text>Offer one-on-one support to VBIS clients. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • InReach Team: </Text>
+            <Text>Take in new VBIS clients. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Coordinators: </Text>
+            <Text>Manage and direct all operations and programs. </Text>
+          </Text>
+
+          <Text style={styles.bodyText}>
+            <Text style={{ fontWeight: "bold" }}> • Volunteers: </Text>
+            <Text>Frontline workers at VBIS. </Text>
+          </Text>
         </View>
       </View>
 
@@ -96,12 +98,13 @@ function AboutVbis({ navigation }) {
   );
 }
 
-export default AboutVbis;
+export default Staff;
 
 const styles = StyleSheet.create({
   appContainer: {
     padding: 20,
     backgroundColor: "#ffffff",
+
     height: "100%",
   },
 
@@ -176,8 +179,8 @@ const styles = StyleSheet.create({
   bodyText: {
     fontSize: 20,
 
-    textAlign: "center",
-    padding: 10,
+    textAlign: "left",
+    padding: 4,
 
     color: "#000000",
   },
@@ -189,22 +192,6 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: "bold",
     color: "#000000",
-  },
-
-  staffButton: {
-    marginTop: 30,
-    marginRight: 30,
-    marginLeft: 30,
-
-    width: 300,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
   },
 
   /*Bottom */
@@ -222,7 +209,6 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     flexDirection: "row",
-
     width: 120,
     height: 62,
     borderRadius: 10,

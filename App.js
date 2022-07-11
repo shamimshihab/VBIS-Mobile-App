@@ -21,6 +21,7 @@ import OtherResources from "./Screens/OtherResources";
 import Settings from "./Screens/Settings";
 import Tutorial from "./Screens/Tutorial";
 import Course from "./Screens/Course.js";
+import Staff from "./Screens/Staff";
 
 import { Searchbar } from "react-native-paper";
 
@@ -165,6 +166,7 @@ function App() {
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Tutorial" component={Tutorial} />
         <Stack.Screen name="COURSE" component={Course} />
+        <Stack.Screen name="Staff" component={Staff} />
       </Stack.Navigator>
     </NavigationContainer>
   );
