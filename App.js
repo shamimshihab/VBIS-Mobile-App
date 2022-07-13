@@ -37,6 +37,9 @@ function HomeScreen({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityLabel="Victoria Brain Injury Society Logo"
+            accessibilityRole="image"
             style={{
               width: 160,
               height: 65,
@@ -50,6 +53,10 @@ function HomeScreen({ navigation }) {
         </View>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -60,6 +67,10 @@ function HomeScreen({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
           onPress={() => navigation.navigate("Tutorial")}
@@ -78,6 +89,10 @@ function HomeScreen({ navigation }) {
       <View style={styles.middleContainer}>
         <View style={styles.rowContainer}>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="About the Victoria Brain Injury Society"
+            accessibilityHint="Go to the About VBIS page"
             color="#f194ff"
             style={styles.button2}
             onPress={() => navigation.navigate("AboutVbis")}
