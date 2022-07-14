@@ -197,19 +197,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "35%",
-    marginLeft: 20,
+    marginLeft: 30,
   },
 
   searchBar: {
-    marginRight: 30,
+    marginRight: 42,
     marginTop: 10,
 
-    width: 292,
+    width: 288,
     height: "7%",
     alignItems: "center",
     justifyContent: "center",
 
-    marginLeft: 40,
+    marginLeft: 34,
   },
 
   /*header Container */
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
 
   button2: {
     marginTop: 4,
-    marginRight: 5,
+    marginRight: 2,
     marginLeft: 5,
 
     width: 140,
