@@ -15,8 +15,17 @@ import { Entypo } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { db } from '../firebase-config.js';
 import { getDatabase, ref, get, child, val } from 'firebase/database';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import { Marker } from "react-native-maps";
 
 const contactRef = ref(getDatabase(), 'contact');
+
+const VBISRegion = {
+  latitude: 48.43251013505817,
+  longitude: -123.36010116633796,
+  latitudeDelta: 0.01,
+  longitudeDelta: 0.01,
+};
 
 let { address, email, hours, phone } = '';
 
@@ -97,6 +106,15 @@ function Contact({ navigation }) {
             </Pressable>
           </View>
         </View>
+
+        {/* <View style={styles.container}>
+          <MapView
+            style={styles.map}
+            initialRegion={VBISRegion} 
+          >
+            <Marker coordinate={VBISRegion} />
+          </MapView>
+        </View> */}
       </View>
 
       <View style={styles.bottomContainer}>
@@ -217,6 +235,19 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: "bold",
     color: "#000000",
+  },
+
+  map: {
+    marginTop: 20,
+    marginRight: 20,
+    marginLeft: 15,
+    width: 300,
+    height: 230,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
   },
 
   /*Bottom */
