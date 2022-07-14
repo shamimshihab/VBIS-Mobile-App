@@ -62,7 +62,7 @@ function Staff({ navigation }) {
 
           {staffList.map((item) => (
             <Text style={styles.bodyText} key={item[0]}>
-              <Text style={{ fontWeight: "bold" }}> • {item[0]}: </Text>
+              <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
               <Text>{item[1]}</Text>
             </Text>
           ))}
