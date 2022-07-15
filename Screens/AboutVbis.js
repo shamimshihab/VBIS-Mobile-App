@@ -32,12 +32,19 @@ function AboutVbis({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityRole="image"
+            accessibilityLabel="Victoria Brain Injury Society logo"
             style={{ width: 140, height: 50 }}
             source={require("../assets/vbisLogo.png")}
           />
         </View>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -48,6 +55,10 @@ function AboutVbis({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
           onPress={() => navigation.navigate("Tutorial")}
@@ -58,11 +69,19 @@ function AboutVbis({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}>About VBIS</Text>
-          <Text style={styles.bodyText}>{about}</Text>
+          <Text style={styles.heading} accessibilityRole="header">
+            About VBIS
+          </Text>
+          <Text style={styles.bodyText} accessibilityRole="text">
+            {about}
+          </Text>
 
           <View>
             <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="VBIS staff members"
+              accessibilityHint="See a description of staff positions at VBIS"
               onPress={() => navigation.navigate("Staff")}
               style={styles.staffButton}
             >
@@ -75,6 +94,10 @@ function AboutVbis({ navigation }) {
       <View style={styles.bottomContainer}>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            accessibilityHint="Go back to previous page"
             style={styles.bottomButton}
             onPress={() => navigation.goBack()}
           >
@@ -84,6 +107,10 @@ function AboutVbis({ navigation }) {
         </View>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Home"
+            accessibilityHint="Go back to home page"
             style={styles.bottomButton}
             onPress={() => navigation.navigate("HomeScreen")}
           >
