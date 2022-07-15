@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase } from 'firebase/database';
+import { getDatabase, get, ref, val } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,6 +22,9 @@ const db = getDatabase(app);
 
 const auth = getAuth(app);
 
-auth.setCustomUserClaims(uid, {client: true});
+//auth.setCustomUserClaims(uid, {client: true});
+/*const user = get(ref(getDatabase, 'users/client')).val();
+auth.updateCurrentUser(user);*/
 
 export default { db };
+export { auth };
