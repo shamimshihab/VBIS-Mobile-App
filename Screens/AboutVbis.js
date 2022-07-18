@@ -221,9 +221,9 @@ const styles = StyleSheet.create({
   staffButton: {
     marginTop: 30,
     marginRight: 30,
-    marginLeft: 30,
+    marginLeft: 10,
 
-    width: 300,
+    width: 310,
     height: 62,
     borderRadius: 10,
     alignItems: "center",
@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
     backgroundColor: "",
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 10,
   },
 
   bottomButton: {

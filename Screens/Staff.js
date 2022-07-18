@@ -12,6 +12,19 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { db } from "../firebase-config";
+import { getDatabase, get, ref, val } from "firebase/database";
+
+const staffRef = ref(getDatabase(), "about/staff");
+
+let staffList = [];
+
+get(staffRef).then((snapshot) => {
+  snapshot.forEach((item) => {
+      const temp = item.val().split(":");
+      staffList.push(temp);
+  })
+});
 
 function Staff({ navigation }) {
   return (
@@ -60,30 +73,13 @@ function Staff({ navigation }) {
             Staff Members
           </Text>
 
-          <Text style={styles.bodyText} accessibilityRole="text">
-            <Text style={{ fontWeight: "bold" }}> • Board of Directors: </Text>
-            <Text>Oversee all major VBIS initiatives. </Text>
-          </Text>
+          {staffList.map((item) => (
+            <Text style={styles.bodyText} key={item[0]} accessible="true" accessibilityRole-"text">
+              <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
+              <Text>{item[1]}</Text>
+            </Text>
+          ))}
 
-          <Text style={styles.bodyText} accessibilityRole="text">
-            <Text style={{ fontWeight: "bold" }}> • Case Managers: </Text>
-            <Text>Offer one-on-one support to VBIS clients. </Text>
-          </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
-            <Text style={{ fontWeight: "bold" }}> • InReach Team: </Text>
-            <Text>Take in new VBIS clients. </Text>
-          </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
-            <Text style={{ fontWeight: "bold" }}> • Coordinators: </Text>
-            <Text>Manage and direct all operations and programs. </Text>
-          </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
-            <Text style={{ fontWeight: "bold" }}> • Volunteers: </Text>
-            <Text>Frontline workers at VBIS. </Text>
-          </Text>
         </View>
       </View>
 
