@@ -32,12 +32,19 @@ function Staff({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityRole="image"
+            accessibilityLabel="Victoria Brain Injury Society logo"
             style={{ width: 140, height: 50 }}
             source={require("../assets/vbisLogo.png")}
           />
         </View>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -48,6 +55,10 @@ function Staff({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
           onPress={() => navigation.navigate("Tutorial")}
@@ -58,10 +69,12 @@ function Staff({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Staff Members</Text>
+          <Text style={styles.heading} accessibilityRole="header">
+            Staff Members
+          </Text>
 
           {staffList.map((item) => (
-            <Text style={styles.bodyText} key={item[0]}>
+            <Text style={styles.bodyText} key={item[0]} accessible={true} accessibilityRole="text">
               <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
               <Text>{item[1]}</Text>
             </Text>
@@ -73,6 +86,10 @@ function Staff({ navigation }) {
       <View style={styles.bottomContainer}>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            accessibilityHint="Go back to previous page"
             style={styles.bottomButton}
             onPress={() => navigation.goBack()}
           >
@@ -82,6 +99,10 @@ function Staff({ navigation }) {
         </View>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Home"
+            accessibilityHint="Go back to home page"
             style={styles.bottomButton}
             onPress={() => navigation.navigate("HomeScreen")}
           >
