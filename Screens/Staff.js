@@ -74,7 +74,7 @@ function Staff({ navigation }) {
           </Text>
 
           {staffList.map((item) => (
-            <Text style={styles.bodyText} key={item[0]} accessible="true" accessibilityRole-"text">
+            <Text style={styles.bodyText} key={item[0]} accessible={true} accessibilityRole="text">
               <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
               <Text>{item[1]}</Text>
             </Text>

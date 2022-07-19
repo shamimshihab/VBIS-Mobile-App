@@ -77,7 +77,12 @@ function Programs({ navigation }) {
           <SafeAreaView>
             <ScrollView style={styles.scrollView}>
               {programList.map((item) => (
-                <View key={item.name}>
+                <View 
+                  key={item.name}
+                  accessible={true}
+                  accessibilityRole="button"
+                  accessibilityLabel={item.name}
+                  accessibilityHint="See the details of this program">
                   <Pressable
                     onPress={() =>
                       navigation.navigate("COURSE", {
