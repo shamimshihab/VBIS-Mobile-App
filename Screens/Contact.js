@@ -52,11 +52,18 @@ function Contact({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityRole="image"
+            accessibilityLabel="Victoria Brain Injury Society logo"
             style={{ width: 140, height: 50 }}
             source={require("../assets/vbisLogo.png")}
           />
         </View>
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -67,6 +74,10 @@ function Contact({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
           onPress={() => navigation.navigate("Tutorial")}
@@ -77,30 +88,38 @@ function Contact({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}>Contact</Text>
+          <Text style={styles.heading} accessibilityRole="header">
+            Contact
+          </Text>
 
-          <Text style={styles.bodyText}>
+          <Text style={styles.bodyText} accessibilityRole="text">
             <Text style={{ fontWeight: "bold" }}> Location:</Text>
             <Text> {address}</Text>
           </Text>
 
-          <Text style={styles.bodyText}>
+          <Text style={styles.bodyText} accessibilityRole="text">
             <Text style={{ fontWeight: "bold" }}> Working Hours:</Text>
             <Text> {hours} </Text>
           </Text>
 
-          <Text style={styles.bodyText}>
+          <Text style={styles.bodyText} accessibilityRole="text">
             <Text style={{ fontWeight: "bold" }}> Phone:</Text>
             <Text> {phone}</Text>
           </Text>
 
-          <Text style={styles.bodyText}>
+          <Text style={styles.bodyText} accessibilityRole="text">
             <Text style={{ fontWeight: "bold" }}> Email:</Text>
             <Text> {email}</Text>
           </Text>
 
           <View>
-            <Pressable onPress={triggerCall} style={styles.callButton}>
+            <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Call VBIS"
+              accessibilityHint="Phone the VBIS front desk"
+              onPress={triggerCall} 
+              style={styles.callButton}>
               <Ionicons name="call" size={24} color="black" />
               <Text style={styles.bouttonText}>Call Us</Text>
             </Pressable>
@@ -120,15 +139,23 @@ function Contact({ navigation }) {
       <View style={styles.bottomContainer}>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            accessibilityHint="Go back to previous page"
             style={styles.bottomButton}
             onPress={() => navigation.goBack()}
           >
             <Entypo name="back" size={22} color="black" />
-            <Text style={styles.bouttonText}>Back</Text>
+            <Text style={styles.buttonText}>Back</Text>
           </Pressable>
         </View>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Home"
+            accessibilityHint="Go back to home page"
             style={styles.bottomButton}
             onPress={() => navigation.navigate("HomeScreen")}
           >

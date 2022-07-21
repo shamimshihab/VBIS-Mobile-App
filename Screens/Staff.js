@@ -12,6 +12,19 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { db } from "../firebase-config";
+import { getDatabase, get, ref, val } from "firebase/database";
+
+const staffRef = ref(getDatabase(), "about/staff");
+
+let staffList = [];
+
+get(staffRef).then((snapshot) => {
+  snapshot.forEach((item) => {
+      const temp = item.val().split(":");
+      staffList.push(temp);
+  })
+});
 
 function Staff({ navigation }) {
   return (
@@ -19,12 +32,19 @@ function Staff({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityRole="image"
+            accessibilityLabel="Victoria Brain Injury Society logo"
             style={{ width: 140, height: 50 }}
             source={require("../assets/vbisLogo.png")}
           />
         </View>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -35,9 +55,13 @@ function Staff({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
+          onPress={() => navigation.navigate("Tutorial")}
         >
           <Text style={styles.buttonText}> Tutorial </Text>
         </Pressable>
@@ -45,38 +69,27 @@ function Staff({ navigation }) {
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Staff Members</Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Board of Directors: </Text>
-            <Text>Oversee all major VBIS initiatives. </Text>
+          <Text style={styles.heading} accessibilityRole="header">
+            Staff Members
           </Text>
 
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Case Managers: </Text>
-            <Text>Offer one-on-one support to VBIS clients. </Text>
-          </Text>
+          {staffList.map((item) => (
+            <Text style={styles.bodyText} key={item[0]} accessible={true} accessibilityRole="text">
+              <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
+              <Text>{item[1]}</Text>
+            </Text>
+          ))}
 
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • InReach Team: </Text>
-            <Text>Take in new VBIS clients. </Text>
-          </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Coordinators: </Text>
-            <Text>Manage and direct all operations and programs. </Text>
-          </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Volunteers: </Text>
-            <Text>Frontline workers at VBIS. </Text>
-          </Text>
         </View>
       </View>
 
       <View style={styles.bottomContainer}>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            accessibilityHint="Go back to previous page"
             style={styles.bottomButton}
             onPress={() => navigation.goBack()}
           >
@@ -86,6 +99,10 @@ function Staff({ navigation }) {
         </View>
         <View>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Home"
+            accessibilityHint="Go back to home page"
             style={styles.bottomButton}
             onPress={() => navigation.navigate("HomeScreen")}
           >

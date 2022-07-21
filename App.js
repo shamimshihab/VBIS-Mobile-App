@@ -37,6 +37,9 @@ function HomeScreen({ navigation }) {
       <View style={styles.headerContainer}>
         <View style={styles.logo}>
           <Image
+            accessible={true}
+            accessibilityRole="image"
+            accessibilityLabel="Victoria Brain Injury Society Logo"
             style={{
               width: 160,
               height: 65,
@@ -50,6 +53,10 @@ function HomeScreen({ navigation }) {
         </View>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Settings"
+          accessibilityHint="Go to the settings page"
           style={styles.setting}
           onPress={() => navigation.navigate("Settings")}
         >
@@ -60,6 +67,10 @@ function HomeScreen({ navigation }) {
         </Pressable>
 
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Tutorial"
+          accessibilityHint="Go to the tutorial page"
           style={styles.tutorial}
           color="#f194ff"
           onPress={() => navigation.navigate("Tutorial")}
@@ -69,6 +80,10 @@ function HomeScreen({ navigation }) {
       </View>
 
       <Searchbar
+        accessible={true}
+        accessibilityRole="search"
+        accessibilityLabel="Search bar"
+        accessibilityHint="Type a word here to search for it in the app"
         style={styles.searchBar}
         placeholder="Search"
         onChangeText={onChangeSearch}
@@ -78,6 +93,10 @@ function HomeScreen({ navigation }) {
       <View style={styles.middleContainer}>
         <View style={styles.rowContainer}>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="About the Victoria Brain Injury Society"
+            accessibilityHint="Go to the About VBIS page"
             color="#f194ff"
             style={styles.button2}
             onPress={() => navigation.navigate("AboutVbis")}
@@ -86,6 +105,10 @@ function HomeScreen({ navigation }) {
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Programs"
+            accessibilityHint="Go to the programs page"
             color="#f194ff"
             style={styles.button2}
             onPress={() => navigation.navigate("Programs")}
@@ -96,6 +119,10 @@ function HomeScreen({ navigation }) {
 
         <View style={styles.rowContainer}>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="My Schedule"
+            accessibilityHint="Go to my schedule"
             style={styles.button2}
             color="#f194ff"
             onPress={() => navigation.navigate("MySchedule")}
@@ -104,6 +131,10 @@ function HomeScreen({ navigation }) {
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="VBIS schedule"
+            accessibilityHint="Go to general VBIS schedule"
             style={styles.button2}
             color="#f194ff"
             onPress={() => navigation.navigate("VbisSchedule")}
@@ -114,6 +145,10 @@ function HomeScreen({ navigation }) {
 
         <View style={styles.rowContainer}>
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="Other Resources"
+            accessibilityHint="Go to a list of other resources"
             color="#f194ff"
             style={styles.button2}
             onPress={() => navigation.navigate("OtherResources")}
@@ -122,6 +157,10 @@ function HomeScreen({ navigation }) {
           </Pressable>
 
           <Pressable
+            accessible={true}
+            accessibilityRole="button"
+            accessibilityLabel="News"
+            accessibilityHint="See the VBIS newsletter"
             color="#f194ff"
             style={styles.button2}
             onPress={() => navigation.navigate("News")}
@@ -133,6 +172,10 @@ function HomeScreen({ navigation }) {
 
       <View style={styles.contactContainer}>
         <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Contact"
+          accessibilityHint="See contact information for VBIS"
           style={styles.button4}
           color="#f194ff"
           onPress={() => navigation.navigate("Contact")}
@@ -197,19 +240,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "35%",
-    marginLeft: 20,
+    marginLeft: 30,
   },
 
   searchBar: {
-    marginRight: 30,
+    marginRight: 42,
     marginTop: 10,
 
-    width: 292,
+    width: 288,
     height: "7%",
     alignItems: "center",
     justifyContent: "center",
 
-    marginLeft: 40,
+    marginLeft: 34,
   },
 
   /*header Container */
@@ -263,7 +306,7 @@ const styles = StyleSheet.create({
 
   button2: {
     marginTop: 4,
-    marginRight: 5,
+    marginRight: 2,
     marginLeft: 5,
 
     width: 140,
