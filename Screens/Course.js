@@ -9,8 +9,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child } from "firebase/database";
 
 function Course ({navigation, route}){
   const {ID} = route.params;
@@ -19,16 +17,11 @@ function Course ({navigation, route}){
   const {Online} = route.params;
   const {StartTime} = route.params;
   const {EndTime} = route.params;
-  const {Weekday} = route.params;
-  const {Index} = route.params;
-
-  console.log(ID);
-  console.log(Desc);
-  console.log(InPer);
-  console.log(Online);
-  console.log(StartTime);
-  console.log(EndTime);
-  console.log(Index);
+  const {Monday} = route.params;
+  const {Tuesday} = route.params;
+  const {Wednesday} = route.params;
+  const {Thursday} = route.params;
+  const {Friday} = route.params;
 
   return (
     <View style={styles.appContainer}>
@@ -65,6 +58,76 @@ function Course ({navigation, route}){
           <Text style={styles.bodyText}>
             {Online ? <Text>Offered Online</Text> : <Text>Offered in Person</Text>}
           </Text>
+          {Monday ? <Text style={styles.bodyText}>
+            Monday 
+            {StartTime != null ? <Text style={styles.bodyText}>
+              {StartTime < 12 ? <Text style={styles.bodyText}> {StartTime}AM</Text> : 
+              StartTime === 12 ? <Text style={styles.bodyText}> {StartTime}PM</Text> : 
+              <Text style={styles.bodyText}> {StartTime-12}PM</Text>}
+            </Text> : null}
+            -
+            {EndTime != null ? <Text style={styles.bodyText}>
+              {EndTime < 12 ? <Text style={styles.bodyText}>{EndTime}AM</Text> : 
+              EndTime === 12 ? <Text style={styles.bodyText}>{EndTime}PM</Text> : 
+              <Text style={styles.bodyText}>{EndTime-12}PM</Text>}
+            </Text> : null}
+          </Text> : null}
+          {Tuesday ? <Text style={styles.bodyText}>
+            Tuesday
+            {StartTime != null ? <Text style={styles.bodyText}>
+              {StartTime < 12 ? <Text style={styles.bodyText}> {StartTime}AM</Text> : 
+              StartTime === 12 ? <Text style={styles.bodyText}> {StartTime}PM</Text> : 
+              <Text style={styles.bodyText}> {StartTime-12}PM</Text>}
+            </Text> : null}
+            -
+            {EndTime != null ? <Text style={styles.bodyText}>
+              {EndTime < 12 ? <Text style={styles.bodyText}>{EndTime}AM</Text> : 
+              EndTime === 12 ? <Text style={styles.bodyText}>{EndTime}PM</Text> : 
+              <Text style={styles.bodyText}>{EndTime-12}PM</Text>}
+            </Text> : null}
+          </Text> : null}
+          {Wednesday ? <Text style={styles.bodyText}>
+            Wednesday
+            {StartTime != null ? <Text style={styles.bodyText}>
+              {StartTime < 12 ? <Text style={styles.bodyText}> {StartTime}AM</Text> : 
+              StartTime === 12 ? <Text style={styles.bodyText}> {StartTime}PM</Text> : 
+              <Text style={styles.bodyText}> {StartTime-12}PM</Text>}
+            </Text> : null}
+            -
+            {EndTime != null ? <Text style={styles.bodyText}>
+              {EndTime < 12 ? <Text style={styles.bodyText}>{EndTime}AM</Text> : 
+              EndTime === 12 ? <Text style={styles.bodyText}>{EndTime}PM</Text> : 
+              <Text style={styles.bodyText}>{EndTime-12}PM</Text>}
+            </Text> : null}
+          </Text> : null}
+          {Thursday ? <Text style={styles.bodyText}>
+            Thursday
+            {StartTime != null ? <Text style={styles.bodyText}>
+              {StartTime < 12 ? <Text style={styles.bodyText}> {StartTime}AM</Text> : 
+              StartTime === 12 ? <Text style={styles.bodyText}> {StartTime}PM</Text> : 
+              <Text style={styles.bodyText}> {StartTime-12}PM</Text>}
+            </Text> : null}
+            -
+            {EndTime != null ? <Text style={styles.bodyText}>
+              {EndTime < 12 ? <Text style={styles.bodyText}>{EndTime}AM</Text> : 
+              EndTime === 12 ? <Text style={styles.bodyText}>{EndTime}PM</Text> : 
+              <Text style={styles.bodyText}>{EndTime-12}PM</Text>}
+            </Text> : null}
+          </Text> : null}
+          {Friday ? <Text style={styles.bodyText}>
+            Friday
+            {StartTime != null ? <Text style={styles.bodyText}>
+              {StartTime < 12 ? <Text style={styles.bodyText}> {StartTime}AM</Text> : 
+              StartTime === 12 ? <Text style={styles.bodyText}> {StartTime}PM</Text> : 
+              <Text style={styles.bodyText}> {StartTime-12}PM</Text>}
+            </Text> : null}
+            -
+            {EndTime != null ? <Text style={styles.bodyText}>
+              {EndTime < 12 ? <Text style={styles.bodyText}>{EndTime}AM</Text> : 
+              EndTime === 12 ? <Text style={styles.bodyText}>{EndTime}PM</Text> : 
+              <Text style={styles.bodyText}>{EndTime-12}PM</Text>}
+            </Text> : null}
+          </Text> : null}
           <Text style={styles.subtitle}>Information</Text>
           <Text style={styles.bodyText}>{Desc}</Text>
         </View>

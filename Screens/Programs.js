@@ -20,14 +20,18 @@ import { getDatabase, ref, get, child } from "firebase/database";
 const programsRef = ref(getDatabase(), "programs");
 
 class Program {
-  constructor(name, description, inperson, online, start, end, weekday) {
+  constructor(name, description, inperson, online, start, end, monday, tuesday, wednesday, thursday, friday) {
     this.name = name;
     this.description = description;
     this.inperson = inperson;
     this.online = online;
     this.start = start;
     this.end = end;
-    this.weekday = weekday;
+    this.monday = monday;
+    this.tuesday = tuesday;
+    this.wednesday = wednesday;
+    this.thursday = thursday;
+    this.friday = friday;
   }
 }
 
@@ -38,7 +42,14 @@ get(programsRef).then((snapshot) => {
       item.val().name,
       item.val().description,
       item.val().inperson,
-      item.val().online
+      item.val().online,
+      item.val().start,
+      item.val().end,
+      item.val().monday,
+      item.val().tuesday,
+      item.val().wednesday,
+      item.val().thursday,
+      item.val().friday
     );
     programList.push(temp);
   });
@@ -97,8 +108,11 @@ function Programs({ navigation }) {
                         Online: item.online,
                         StartTime: item.start,
                         EndTime: item.end,
-                        Weekday: item.weekday,
-                        Index: index,
+                        Monday: item.monday,
+                        Tuesday: item.tuesday,
+                        Wednesday: item.wednesday,
+                        Thursday: item.thursday,
+                        Friday: item.friday,
                       })
                     }
                   >
@@ -198,7 +212,7 @@ const styles = StyleSheet.create({
   middleContainer: {
     flexDirection: "column",
 
-    height: 500,
+    height: "70%",
 
     justifyContent: "space-between",
   },
@@ -250,7 +264,7 @@ const styles = StyleSheet.create({
   /*Bottom */
   bottomContainer: {
     flexDirection: "row",
-    height: 200,
+    height: "15%",
 
     backgroundColor: "",
     alignItems: "center",
