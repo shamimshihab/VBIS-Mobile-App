@@ -17,7 +17,6 @@ function Course ({navigation, route}){
   const {Online} = route.params;
   const {StartTime} = route.params;
   const {EndTime} = route.params;
-  const {Index} = route.params;
   const {Monday} = route.params;
   const {Tuesday} = route.params;
   const {Wednesday} = route.params;

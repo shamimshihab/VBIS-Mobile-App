@@ -113,7 +113,6 @@ function Programs({ navigation }) {
                         Wednesday: item.wednesday,
                         Thursday: item.thursday,
                         Friday: item.friday,
-                        Index: index,
                       })
                     }
                   >
