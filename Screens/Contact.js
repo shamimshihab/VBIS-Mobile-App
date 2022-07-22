@@ -10,15 +10,16 @@ import {
   Pressable,
   Image,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { db } from '../firebase-config.js';
-import { getDatabase, ref, get, child, val } from 'firebase/database';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
-import { Marker } from "react-native-maps";
+import TopHeader from "../Components/TopHeader";
 
-const contactRef = ref(getDatabase(), 'contact');
+import { Ionicons } from "@expo/vector-icons";
+import { db } from "../firebase-config.js";
+import { getDatabase, ref, get, child, val } from "firebase/database";
+//import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import { Marker } from "react-native-maps";
+import Footer from "../Components/Footer";
+
+const contactRef = ref(getDatabase(), "contact");
 
 const VBISRegion = {
   latitude: 48.43251013505817,
@@ -27,9 +28,9 @@ const VBISRegion = {
   longitudeDelta: 0.01,
 };
 
-let { address, email, hours, phone } = '';
+let { address, email, hours, phone } = "";
 
-get(contactRef).then(snapshot => {
+get(contactRef).then((snapshot) => {
   address = snapshot.val().address;
   email = snapshot.val().email;
   hours = snapshot.val().hours;
@@ -50,40 +51,7 @@ function Contact({ navigation }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <Image
-            accessible={true}
-            accessibilityRole="image"
-            accessibilityLabel="Victoria Brain Injury Society logo"
-            style={{ width: 140, height: 50 }}
-            source={require("../assets/vbisLogo.png")}
-          />
-        </View>
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Settings"
-          accessibilityHint="Go to the settings page"
-          style={styles.setting}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/settings.png")}
-          />
-        </Pressable>
-
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Tutorial"
-          accessibilityHint="Go to the tutorial page"
-          style={styles.tutorial}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
-        >
-          <Text style={styles.bouttonText}> Tutorial </Text>
-        </Pressable>
+        <TopHeader navigation={navigation} />
       </View>
 
       <View style={styles.middleContainer}>
@@ -118,8 +86,9 @@ function Contact({ navigation }) {
               accessibilityRole="button"
               accessibilityLabel="Call VBIS"
               accessibilityHint="Phone the VBIS front desk"
-              onPress={triggerCall} 
-              style={styles.callButton}>
+              onPress={triggerCall}
+              style={styles.callButton}
+            >
               <Ionicons name="call" size={24} color="black" />
               <Text style={styles.bouttonText}>Call Us</Text>
             </Pressable>
@@ -137,32 +106,7 @@ function Contact({ navigation }) {
       </View>
 
       <View style={styles.bottomContainer}>
-        <View>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            accessibilityHint="Go back to previous page"
-            style={styles.bottomButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Entypo name="back" size={22} color="black" />
-            <Text style={styles.buttonText}>Back</Text>
-          </Pressable>
-        </View>
-        <View>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Home"
-            accessibilityHint="Go back to home page"
-            style={styles.bottomButton}
-            onPress={() => navigation.navigate("HomeScreen")}
-          >
-            <AntDesign name="home" size={22} color="black" />
-            <Text style={styles.buttonText}> Home </Text>
-          </Pressable>
-        </View>
+        <Footer navigation={navigation} />
       </View>
     </View>
   );

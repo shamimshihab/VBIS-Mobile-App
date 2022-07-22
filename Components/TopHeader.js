@@ -9,29 +9,44 @@ import {
   Image,
 } from "react-native";
 
-function TopHeader() {
+function TopHeader({ navigation }) {
   return (
-    <View>
-      <View style={styles.rowContainer}>
-        <View style={styles.logo}>
-          <Image
-            style={{ width: 120, height: 50 }}
-            source={require("../assets/vbisLogo.png")}
-          />
-        </View>
-
-        <View style={styles.settings}>
-          <Pressable color="#f194ff" onPress={() => Alert.alert("Settings")}>
-            <Text style={styles.buttonText}> Settings </Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.tutorial}>
-          <Pressable color="#f194ff" onPress={() => Alert.alert("TUTORIAL")}>
-            <Text style={styles.buttonText}> Tutorial </Text>
-          </Pressable>
-        </View>
+    <View style={styles.headerContainer}>
+      <View style={styles.logo}>
+        <Image
+          accessible={true}
+          accessibilityRole="image"
+          accessibilityLabel="Victoria Brain Injury Society logo"
+          style={{ width: 140, height: 50 }}
+          source={require("../assets/vbisLogo.png")}
+        />
       </View>
+
+      <Pressable
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Settings"
+        accessibilityHint="Go to the settings page"
+        style={styles.setting}
+        onPress={() => navigation.navigate("Settings")}
+      >
+        <Image
+          style={{ width: 40, height: 40 }}
+          source={require("../assets/settings.png")}
+        />
+      </Pressable>
+
+      <Pressable
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Tutorial"
+        accessibilityHint="Go to the tutorial page"
+        style={styles.tutorial}
+        color="#f194ff"
+        onPress={() => navigation.navigate("Tutorial")}
+      >
+        <Text style={styles.buttonText}> Tutorial </Text>
+      </Pressable>
     </View>
   );
 }
@@ -39,59 +54,139 @@ function TopHeader() {
 export default TopHeader;
 
 const styles = StyleSheet.create({
-  title: {
-    flex: 0,
-    marginTop: 10,
-    marginLeft: 100,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  appContainer: {
+    padding: 20,
+    backgroundColor: "#ffffff",
+    height: "100%",
   },
-  rowContainer: {
-    flexDirection: "row",
-    marginLeft: 20,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingTop: 5,
-  },
+
+  /*Top Header Style*/
 
   logo: {
     marginTop: 50,
-    marginRight: 45,
-    width: 125,
+    marginRight: 20,
+    marginBottom: 50,
+    width: 100,
+    height: 50,
+    marginLeft: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  setting: {
+    marginTop: 50,
+    marginRight: 15,
+    marginLeft: 40,
+    marginBottom: 50,
+    width: 50,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
   },
   tutorial: {
     marginTop: 50,
-    marginRight: 20,
-    width: 60,
-    height: 40,
+    marginRight: 10,
+    marginBottom: 50,
+    width: 100,
+    height: 50,
     alignItems: "center",
-    borderRadius: 10,
     justifyContent: "center",
-    backgroundColor: "#89B589",
+    backgroundColor: "#d3d3d3",
+
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
+  },
+  headerContainer: {
+    flexDirection: "row",
+    height: "15%",
+
+    backgroundColor: "",
+    alignItems: "center",
+    justifyContent: "center",
   },
 
-  settings: {
-    marginTop: 50,
-    marginRight: 20,
-    width: 60,
-    height: 40,
+  /*Middle*/
+  middleContainer: {
+    flexDirection: "column",
+
+    height: "70%",
+
+    justifyContent: "space-between",
+  },
+
+  heading: {
     alignItems: "center",
-    borderRadius: 10,
-    justifyContent: "center",
-    backgroundColor: "#89B589",
+    fontSize: 30,
+    padding: 20,
+
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#000000",
+  },
+
+  bodyText: {
+    fontSize: 20,
+
+    textAlign: "center",
+    padding: 10,
+
+    color: "#000000",
   },
 
   buttonText: {
-    fontSize: 10,
-    fontFamily: "OpenSans",
+    fontSize: 15,
+
     textAlign: "center",
-    padding: 10,
+    padding: 5,
     fontWeight: "bold",
     color: "#000000",
+  },
+
+  staffButton: {
+    marginTop: 30,
+    marginRight: 30,
+    marginLeft: 10,
+
+    width: 310,
+    height: 62,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
+  },
+
+  /*Bottom */
+  bottomContainer: {
+    flexDirection: "row",
+    height: "15%",
+
+    backgroundColor: "",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 10,
+  },
+
+  bottomButton: {
+    marginTop: 20,
+    marginRight: 30,
+    marginLeft: 30,
+    flexDirection: "row",
+
+    width: 120,
+    height: 62,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
   },
 });
