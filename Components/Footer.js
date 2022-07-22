@@ -3,45 +3,54 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Button,
   Alert,
   Pressable,
   Image,
 } from "react-native";
-import TopHeader from "../Components/TopHeader";
-import Footer from "../Components/Footer";
 
-import { Searchbar } from "react-native-paper";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-function Tutorial({ navigation }) {
+function Footer({ navigation }) {
   return (
-    <View style={styles.appContainer}>
-      <View style={styles.headerContainer}>
-        <TopHeader navigation={navigation} />
+    <View style={styles.bottomContainer}>
+      <View>
+        <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Back"
+          accessibilityHint="Go back to previous page"
+          style={styles.bottomButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Entypo name="back" size={22} color="black" />
+          <Text style={styles.buttonText}>Back</Text>
+        </Pressable>
       </View>
-
-      <View style={styles.middleContainer}>
-        <View>
-          <Text style={styles.heading}> Tutorial </Text>
-          <Text style={styles.bodyText}></Text>
-        </View>
-      </View>
-
-      <View style={styles.bottomContainer}>
-        <Footer navigation={navigation} />
+      <View>
+        <Pressable
+          accessible={true}
+          accessibilityRole="button"
+          accessibilityLabel="Home"
+          accessibilityHint="Go back to home page"
+          style={styles.bottomButton}
+          onPress={() => navigation.navigate("HomeScreen")}
+        >
+          <AntDesign name="home" size={22} color="black" />
+          <Text style={styles.buttonText}> Home </Text>
+        </Pressable>
       </View>
     </View>
   );
 }
 
-export default Tutorial;
+export default Footer;
 
 const styles = StyleSheet.create({
   appContainer: {
     padding: 20,
     backgroundColor: "#ffffff",
-
     height: "100%",
   },
 
@@ -118,7 +127,7 @@ const styles = StyleSheet.create({
 
     textAlign: "center",
     padding: 10,
-    fontWeight: "bold",
+
     color: "#000000",
   },
 
@@ -131,6 +140,22 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
 
+  staffButton: {
+    marginTop: 30,
+    marginRight: 30,
+    marginLeft: 10,
+
+    width: 310,
+    height: 62,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
+  },
+
   /*Bottom */
   bottomContainer: {
     flexDirection: "row",
@@ -139,6 +164,7 @@ const styles = StyleSheet.create({
     backgroundColor: "",
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 10,
   },
 
   bottomButton: {
@@ -146,6 +172,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     flexDirection: "row",
+
     width: 120,
     height: 62,
     borderRadius: 10,

@@ -9,9 +9,9 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import TopHeader from "../Components/TopHeader";
 
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import Footer from "../Components/Footer";
 import { db } from "../firebase-config";
 import { getDatabase, get, ref, val } from "firebase/database";
 
@@ -21,50 +21,16 @@ let staffList = [];
 
 get(staffRef).then((snapshot) => {
   snapshot.forEach((item) => {
-      const temp = item.val().split(":");
-      staffList.push(temp);
-  })
+    const temp = item.val().split(":");
+    staffList.push(temp);
+  });
 });
 
 function Staff({ navigation }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <Image
-            accessible={true}
-            accessibilityRole="image"
-            accessibilityLabel="Victoria Brain Injury Society logo"
-            style={{ width: 140, height: 50 }}
-            source={require("../assets/vbisLogo.png")}
-          />
-        </View>
-
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Settings"
-          accessibilityHint="Go to the settings page"
-          style={styles.setting}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/settings.png")}
-          />
-        </Pressable>
-
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Tutorial"
-          accessibilityHint="Go to the tutorial page"
-          style={styles.tutorial}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
-        >
-          <Text style={styles.buttonText}> Tutorial </Text>
-        </Pressable>
+        <TopHeader navigation={navigation} />
       </View>
 
       <View style={styles.middleContainer}>
@@ -74,42 +40,21 @@ function Staff({ navigation }) {
           </Text>
 
           {staffList.map((item) => (
-            <Text style={styles.bodyText} key={item[0]} accessible={true} accessibilityRole="text">
+            <Text
+              style={styles.bodyText}
+              key={item[0]}
+              accessible={true}
+              accessibilityRole="text"
+            >
               <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
               <Text>{item[1]}</Text>
             </Text>
           ))}
-
         </View>
       </View>
 
       <View style={styles.bottomContainer}>
-        <View>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Back"
-            accessibilityHint="Go back to previous page"
-            style={styles.bottomButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Entypo name="back" size={22} color="black" />
-            <Text style={styles.buttonText}>Back</Text>
-          </Pressable>
-        </View>
-        <View>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Home"
-            accessibilityHint="Go back to home page"
-            style={styles.bottomButton}
-            onPress={() => navigation.navigate("HomeScreen")}
-          >
-            <AntDesign name="home" size={22} color="black" />
-            <Text style={styles.buttonText}> Home </Text>
-          </Pressable>
-        </View>
+        <Footer navigation={navigation} />
       </View>
     </View>
   );
