@@ -22,9 +22,5 @@ const db = getDatabase(app);
 
 const auth = getAuth(app);
 
-//auth.setCustomUserClaims(uid, {client: true});
-/*const user = get(ref(getDatabase, 'users/client')).val();
-auth.updateCurrentUser(user);*/
-
 export default { db };
 export { auth };
