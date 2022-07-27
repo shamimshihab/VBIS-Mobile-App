@@ -25,16 +25,20 @@ import Staff from "./Screens/Staff";
 
 import { Searchbar } from "react-native-paper";
 
-import { db } from "./firebase-config.js";
-import { getDatabase, get, ref, val } from "firebase/database";
 import { auth } from "./firebase-config.js";
-import { updateCurrentUser } from "firebase/auth";
-let user = null;
-get(ref(getDatabase(), 'users/client')).then(snapshot => {
-  user = snapshot.val();
-  console.log(user);
-});
-auth.updateCurrentUser(user);
+import { signInAnonymously } from "firebase/auth";
+
+signInAnonymously(auth)
+  .then(() => {
+    //TO DO
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    //TO DO: error handling
+  });
 
 function HomeScreen({ navigation }) {
   //const { onPress, title = 'Save' } = props;
