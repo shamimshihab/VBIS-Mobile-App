@@ -85,7 +85,7 @@ function Contact({ navigation }) {
               accessible={true}
               accessibilityRole="button"
               accessibilityLabel="Call VBIS"
-              accessibilityHint="Phone the VBIS front desk"
+              accessibilityHint="Open Phone app to call the VBIS front desk"
               onPress={triggerCall}
               style={styles.callButton}
             >
