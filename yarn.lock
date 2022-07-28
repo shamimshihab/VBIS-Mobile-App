@@ -6142,13 +6142,6 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-"react-native@*", "react-native@>=0.42.0", "react-native@0.68.2":
-=======
-"react-native@*", "react-native@>= 0.51", "react-native@>=0.42.0", "react-native@>=0.59", "react-native@0.68.2":
->>>>>>> Stashed changes
-=======
 "react-native@*", "react-native@>= 0.64.3", "react-native@>=0.42.0", "react-native@>=0.59", "react-native@0.68.2":
 >>>>>>> main
   "integrity" "sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw=="
