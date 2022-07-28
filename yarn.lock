@@ -6143,7 +6143,6 @@
     "prop-types" "^15.6.0"
 
 "react-native@*", "react-native@>= 0.64.3", "react-native@>=0.42.0", "react-native@>=0.59", "react-native@0.68.2":
->>>>>>> main
   "integrity" "sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.68.2.tgz"
   "version" "0.68.2"
