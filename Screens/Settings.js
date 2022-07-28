@@ -10,19 +10,85 @@ import {
   Image,
 } from "react-native";
 
+import { styles } from "../style/styles";
 import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
+// redux hooks
+import { useSelector, useDispatch } from "react-redux";
+// actions
+import { switchMode } from "../redux-store/actions";
+// component state management
+import { useEffect, useState } from "react";
 
 function Settings({ navigation }) {
+  // get the current theme
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+  // Handle changing the theme mode
+  const handleThemeChange = () => {
+    dispatch(switchMode(theme.mode === "light" ? "dark" : "light"));
+  };
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
+
+  const themeChangerTextOnPress = function (mode) {
+    if (mode == "light") {
+      return "Switch to  dark mode";
+    } else {
+      return " Switch to light mode";
+    }
+  };
+
   return (
-    <View style={styles.appContainer}>
+    <View
+      style={
+        mode == "light" ? styles.appContainer_light : styles.appContainer_dark
+      }
+    >
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
       </View>
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Settings </Text>
-          <Text style={styles.bodyText}></Text>
+          <Text
+            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+          >
+            {" "}
+            Settings{" "}
+          </Text>
+          <View style={styles.themeChange}>
+            <Text
+              style={
+                mode == "light" ? styles.bodyText_light : styles.bodyText_dark
+              }
+            >
+              You are on {theme.mode} mode!
+            </Text>
+            <Pressable
+              onPress={handleThemeChange}
+              style={
+                mode == "light"
+                  ? styles.themeChangeButton_light
+                  : styles.themeChangeButton_dark
+              }
+            >
+              <Text
+                style={
+                  mode == "light"
+                    ? styles.buttonText_light
+                    : styles.buttonText_dark
+                }
+              >
+                {themeChangerTextOnPress(mode)}
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
 
@@ -34,124 +100,3 @@ function Settings({ navigation }) {
 }
 
 export default Settings;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  heading: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "center",
-    padding: 10,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-    width: 120,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});

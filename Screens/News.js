@@ -12,6 +12,9 @@ import {
 
 import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 function News({ navigation }) {
   return (
     <View style={styles.appContainer}>

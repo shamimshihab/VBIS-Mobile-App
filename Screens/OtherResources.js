@@ -44,6 +44,19 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
+  appContainer_light: {
+    padding: 20,
+    backgroundColor: "#ffffff",
+
+    height: "100%",
+  },
+  appContainer_dark: {
+    padding: 20,
+    backgroundColor: "black",
+
+    height: "100%",
+  },
+
   /*Top Header Style*/
 
   logo: {

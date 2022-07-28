@@ -8,11 +8,13 @@ import {
   Pressable,
   Image,
 } from "react-native";
+// For Navigation
 import { useNavigation, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// Import Pages
 import Contact from "./Screens/Contact";
 import AboutVbis from "./Screens/AboutVbis";
-import TopHeader from "./Components/TopHeader";
+import HomeScreen from "./Screens/HomeScreen";
 import Programs from "./Screens/Programs";
 import MySchedule from "./Screens/MySchedule";
 import VbisSchedule from "./Screens/VbisSchedule";
@@ -23,355 +25,41 @@ import Tutorial from "./Screens/Tutorial";
 import Course from "./Screens/Course.js";
 import Staff from "./Screens/Staff";
 
-import { Searchbar } from "react-native-paper";
+// Redux for Theme
+import { Provider } from "react-redux";
+import configureStore from "./redux-store/store";
 
-function HomeScreen({ navigation }) {
-  //const { onPress, title = 'Save' } = props;
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
-
-  return (
-    <View style={styles.appContainer}>
-      {/*top header */}
-
-      <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <Image
-            accessible={true}
-            accessibilityRole="image"
-            accessibilityLabel="Victoria Brain Injury Society Logo"
-            style={{
-              width: 160,
-              height: 65,
-
-              borderWidth: 1,
-              borderRadius: 7,
-              borderColor: "white",
-            }}
-            source={require("./assets/vbisLogo.png")}
-          />
-        </View>
-
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Settings"
-          accessibilityHint="Go to the settings page"
-          style={styles.setting}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("./assets/settings.png")}
-          />
-        </Pressable>
-
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Tutorial"
-          accessibilityHint="Go to the tutorial page"
-          style={styles.tutorial}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
-        >
-          <Text style={styles.buttonText}> Tutorial </Text>
-        </Pressable>
-      </View>
-
-      <Searchbar
-        accessible={true}
-        accessibilityRole="search"
-        accessibilityLabel="Search bar"
-        accessibilityHint="Type a word here to search for it in the app"
-        style={styles.searchBar}
-        placeholder="Search"
-        onChangeText={onChangeSearch}
-        value={searchQuery}
-      />
-
-      <View style={styles.middleContainer}>
-        <View style={styles.rowContainer}>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="About the Victoria Brain Injury Society"
-            accessibilityHint="Go to the About VBIS page"
-            color="#f194ff"
-            style={styles.button2}
-            onPress={() => navigation.navigate("AboutVbis")}
-          >
-            <Text style={styles.buttonText}>About VBIS</Text>
-          </Pressable>
-
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Programs"
-            accessibilityHint="Go to the programs page"
-            color="#f194ff"
-            style={styles.button2}
-            onPress={() => navigation.navigate("Programs")}
-          >
-            <Text style={styles.buttonText}>Programs</Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.rowContainer}>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="My Schedule"
-            accessibilityHint="Go to my schedule"
-            style={styles.button2}
-            color="#f194ff"
-            onPress={() => navigation.navigate("MySchedule")}
-          >
-            <Text style={styles.buttonText}>My Schedule</Text>
-          </Pressable>
-
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="VBIS schedule"
-            accessibilityHint="Go to general VBIS schedule"
-            style={styles.button2}
-            color="#f194ff"
-            onPress={() => navigation.navigate("VbisSchedule")}
-          >
-            <Text style={styles.buttonText}>VBIS Schedule </Text>
-          </Pressable>
-        </View>
-
-        <View style={styles.rowContainer}>
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="Other Resources"
-            accessibilityHint="Go to a list of other resources"
-            color="#f194ff"
-            style={styles.button2}
-            onPress={() => navigation.navigate("OtherResources")}
-          >
-            <Text style={styles.buttonText}>Other Resources </Text>
-          </Pressable>
-
-          <Pressable
-            accessible={true}
-            accessibilityRole="button"
-            accessibilityLabel="News"
-            accessibilityHint="See the VBIS newsletter"
-            color="#f194ff"
-            style={styles.button2}
-            onPress={() => navigation.navigate("News")}
-          >
-            <Text style={styles.buttonText}> News </Text>
-          </Pressable>
-        </View>
-      </View>
-
-      <View style={styles.contactContainer}>
-        <Pressable
-          accessible={true}
-          accessibilityRole="button"
-          accessibilityLabel="Contact"
-          accessibilityHint="See contact information for VBIS"
-          style={styles.button4}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Contact")}
-        >
-          <Text style={styles.buttonText}> Contact VBIS </Text>
-        </Pressable>
-      </View>
-    </View>
-  );
-}
-
+// Initialize the store
+const store = configureStore();
+// For Navigation
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="HomeScreen"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="AboutVbis" component={AboutVbis} />
-        <Stack.Screen name="Contact" component={Contact} />
-        <Stack.Screen name="Programs" component={Programs} />
-        <Stack.Screen name="MySchedule" component={MySchedule} />
-        <Stack.Screen name="VbisSchedule" component={VbisSchedule} />
-        <Stack.Screen name="News" component={News} />
-        <Stack.Screen name="OtherResources" component={OtherResources} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="Tutorial" component={Tutorial} />
-        <Stack.Screen name="COURSE" component={Course} />
-        <Stack.Screen name="Staff" component={Staff} />
-      </Stack.Navigator>
+      <Provider store={store}>
+        <Stack.Navigator
+          initialRouteName="HomeScreen"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="AboutVbis" component={AboutVbis} />
+          <Stack.Screen name="Contact" component={Contact} />
+          <Stack.Screen name="Programs" component={Programs} />
+          <Stack.Screen name="MySchedule" component={MySchedule} />
+          <Stack.Screen name="VbisSchedule" component={VbisSchedule} />
+          <Stack.Screen name="News" component={News} />
+          <Stack.Screen name="OtherResources" component={OtherResources} />
+          <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="Tutorial" component={Tutorial} />
+          <Stack.Screen name="COURSE" component={Course} />
+          <Stack.Screen name="Staff" component={Staff} />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    flexDirection: "column",
-    backgroundColor: "#ffffff",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
-  },
-
-  title: {
-    flex: 0,
-    marginTop: 10,
-    marginLeft: 100,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  rowContainer: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "35%",
-    marginLeft: 30,
-  },
-
-  searchBar: {
-    marginRight: 42,
-    marginTop: 10,
-
-    width: 288,
-    height: "7%",
-    alignItems: "center",
-    justifyContent: "center",
-
-    marginLeft: 34,
-  },
-
-  /*header Container */
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginLeft: 140,
-    marginBottom: 10,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 10,
-    marginLeft: 15,
-    marginBottom: 10,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 45,
-    marginBottom: 10,
-    width: 90,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  headerContainer: {
-    flexDirection: "row",
-    backgroundColor: "#ffffff",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "16%",
-
-    marginLeft: 20,
-  },
-
-  button2: {
-    marginTop: 4,
-    marginRight: 2,
-    marginLeft: 5,
-
-    width: 140,
-
-    height: "95%",
-
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  button3: {
-    marginTop: 20,
-    marginRight: 45,
-    width: 125,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#89B589",
-    borderRadius: 7.5,
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 10,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  middleContainer: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "71.5%",
-    padding: 20,
-  },
-
-  contactContainer: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "18%",
-    width: "100%",
-
-    marginLeft: 30,
-    backgroundColor: "#ffffff",
-    marginTop: 5,
-  },
-  button4: {
-    marginTop: 28,
-    marginLeft: 5,
-    marginRight: 45,
-    marginBottom: 100,
-    width: 292,
-    height: "48%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});

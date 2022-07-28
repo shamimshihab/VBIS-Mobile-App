@@ -18,6 +18,9 @@ import { getDatabase, ref, get, child, val } from "firebase/database";
 //import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { Marker } from "react-native-maps";
 import Footer from "../Components/Footer";
+import { styles } from "../style/styles";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const contactRef = ref(getDatabase(), "contact");
 
@@ -38,6 +41,20 @@ get(contactRef).then((snapshot) => {
 });
 
 function Contact({ navigation }) {
+  // get the current theme
+
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
+
   const triggerCall = () => {
     const args = {
       number: phone, // String value with the number to call
@@ -49,37 +66,70 @@ function Contact({ navigation }) {
   };
 
   return (
-    <View style={styles.appContainer}>
+    <View
+      style={
+        mode == "light" ? styles.appContainer_light : styles.appContainer_dark
+      }
+    >
+      {/* Top Header(VBIS logo, Settings, Tuitorial)*/}
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
       </View>
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading} accessibilityRole="header">
+          {/* Heading */}
+          <Text
+            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            accessibilityRole="header"
+          >
             Contact
           </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
+          {/* Contact Description */}
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextContact_light
+                : styles.bodyTextContact_dark
+            }
+            accessibilityRole="text"
+          >
             <Text style={{ fontWeight: "bold" }}> Location:</Text>
             <Text> {address}</Text>
           </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextContact_light
+                : styles.bodyTextContact_dark
+            }
+            accessibilityRole="text"
+          >
             <Text style={{ fontWeight: "bold" }}> Working Hours:</Text>
             <Text> {hours} </Text>
           </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextContact_light
+                : styles.bodyTextContact_dark
+            }
+            accessibilityRole="text"
+          >
             <Text style={{ fontWeight: "bold" }}> Phone:</Text>
             <Text> {phone}</Text>
           </Text>
-
-          <Text style={styles.bodyText} accessibilityRole="text">
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextContact_light
+                : styles.bodyTextContact_dark
+            }
+            accessibilityRole="text"
+          >
             <Text style={{ fontWeight: "bold" }}> Email:</Text>
             <Text> {email}</Text>
           </Text>
-
           <View>
             <Pressable
               accessible={true}
@@ -87,10 +137,22 @@ function Contact({ navigation }) {
               accessibilityLabel="Call VBIS"
               accessibilityHint="Open Phone app to call the VBIS front desk"
               onPress={triggerCall}
-              style={styles.callButton}
+              style={
+                mode == "light"
+                  ? styles.callButton_light
+                  : styles.callButton_dark
+              }
             >
               <Ionicons name="call" size={24} color="black" />
-              <Text style={styles.bouttonText}>Call Us</Text>
+              <Text
+                style={
+                  mode == "light"
+                    ? styles.buttonText_light
+                    : styles.buttonText_dark
+                }
+              >
+                Call Us
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -104,7 +166,7 @@ function Contact({ navigation }) {
           </MapView>
         </View> */}
       </View>
-
+      {/* Footer of the page(Back Button, Home Button)*/}
       <View style={styles.bottomContainer}>
         <Footer navigation={navigation} />
       </View>
@@ -113,155 +175,3 @@ function Contact({ navigation }) {
 }
 
 export default Contact;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  heading: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "left",
-    padding: 4,
-
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  map: {
-    marginTop: 20,
-    marginRight: 20,
-    marginLeft: 15,
-    width: 300,
-    height: 230,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-
-    width: 120,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  callButton: {
-    marginTop: 20,
-    marginRight: 20,
-    marginLeft: 15,
-    flexDirection: "row",
-
-    width: "90%",
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});
