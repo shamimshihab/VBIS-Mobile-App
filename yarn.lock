@@ -2183,7 +2183,6 @@
 "@types/geojson@^7946.0.7":
 =======
 "@types/geojson@^7946.0.8":
->>>>>>> main
   "integrity" "sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA=="
   "resolved" "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.8.tgz"
   "version" "7946.0.8"
