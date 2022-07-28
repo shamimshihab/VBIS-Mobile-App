@@ -8,8 +8,27 @@ import {
   Pressable,
   Image,
 } from "react-native";
+//For Theme
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+// Style Page Import
+import { styles } from "../style/styles";
 
 function TopHeader({ navigation }) {
+  // get the current theme
+
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.logo}>
@@ -18,7 +37,11 @@ function TopHeader({ navigation }) {
           accessibilityRole="image"
           accessibilityLabel="Victoria Brain Injury Society logo"
           style={{ width: 140, height: 50 }}
-          source={require("../assets/vbisLogo.png")}
+          source={
+            mode == "light"
+              ? require("../assets/vbisLogo.png")
+              : require("../assets/darkVbisLogo.png")
+          }
         />
       </View>
 
@@ -27,12 +50,16 @@ function TopHeader({ navigation }) {
         accessibilityRole="button"
         accessibilityLabel="Settings"
         accessibilityHint="Go to the settings page"
-        style={styles.setting}
+        style={mode == "light" ? styles.setting_light : styles.setting_dark}
         onPress={() => navigation.navigate("Settings")}
       >
         <Image
           style={{ width: 40, height: 40 }}
-          source={require("../assets/settings.png")}
+          source={
+            mode == "light"
+              ? require("../assets/settings.png")
+              : require("../assets/Setting_white.png")
+          }
         />
       </Pressable>
 
@@ -41,152 +68,20 @@ function TopHeader({ navigation }) {
         accessibilityRole="button"
         accessibilityLabel="Tutorial"
         accessibilityHint="Go to the tutorial page"
-        style={styles.tutorial}
+        style={mode == "light" ? styles.tutorial_light : styles.tutorial_dark}
         color="#f194ff"
         onPress={() => navigation.navigate("Tutorial")}
       >
-        <Text style={styles.buttonText}> Tutorial </Text>
+        <Text
+          style={
+            mode == "light" ? styles.buttonText_light : styles.buttonText_dark
+          }
+        >
+          Tutorial
+        </Text>
       </Pressable>
     </View>
   );
 }
 
 export default TopHeader;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  heading: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "center",
-    padding: 10,
-
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  staffButton: {
-    marginTop: 30,
-    marginRight: 30,
-    marginLeft: 10,
-
-    width: 310,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 10,
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-
-    width: 120,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});

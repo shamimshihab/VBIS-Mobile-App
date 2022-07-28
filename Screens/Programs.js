@@ -14,6 +14,9 @@ import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
 import { db } from "../firebase-config.js";
 import { getDatabase, ref, get, child } from "firebase/database";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { styles } from "../style/styles";
 
 const programsRef = ref(getDatabase(), "programs");
 
@@ -66,17 +69,41 @@ get(programsRef).then((snapshot) => {
 });
 
 function Programs({ navigation }) {
+  // get the current theme
+
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   return (
-    <View style={styles.appContainer}>
+    <View
+      style={
+        mode == "light" ? styles.appContainer_light : styles.appContainer_dark
+      }
+    >
+      {/* Top Header(VBIS logo, Settings, Tuitorial)*/}
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
       </View>
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Programs </Text>
-
+          {/* Heading*/}
+          <Text
+            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+          >
+            {" "}
+            Programs{" "}
+          </Text>
+          {/* List of Programs*/}
           <SafeAreaView>
-            <ScrollView style={styles.scrollView}>
+            <ScrollView style={styles.scrollViewProgramPage}>
               {programList.map((item) => (
                 <View
                   key={item.name}
@@ -86,7 +113,11 @@ function Programs({ navigation }) {
                   accessibilityHint="See the details of this program"
                 >
                   <Pressable
-                    style={styles.itemButton}
+                    style={
+                      mode == "light"
+                        ? styles.itemButton_light
+                        : styles.itemButton_dark
+                    }
                     onPress={() =>
                       navigation.navigate("COURSE", {
                         ID: item.name,
@@ -103,7 +134,15 @@ function Programs({ navigation }) {
                       })
                     }
                   >
-                    <Text style={styles.bodyText}>{item.name}</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.buttonText_light
+                          : styles.buttonText_dark
+                      }
+                    >
+                      {item.name}
+                    </Text>
                   </Pressable>
                 </View>
               ))}
@@ -111,7 +150,7 @@ function Programs({ navigation }) {
           </SafeAreaView>
         </View>
       </View>
-
+      {/* Footer of the page(Back Button, Home Button)*/}
       <View style={styles.bottomContainer}>
         <Footer navigation={navigation} />
       </View>
@@ -120,139 +159,3 @@ function Programs({ navigation }) {
 }
 
 export default Programs;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  scrollView: {
-    height: 500,
-  },
-  heading: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  itemButton: {
-    marginTop: 20,
-
-    width: 330,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "center",
-    padding: 10,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-    width: 120,
-    height: 62,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});

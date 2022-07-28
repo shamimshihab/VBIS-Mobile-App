@@ -15,10 +15,27 @@ import {
 import { Searchbar } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { styles } from "../style/styles";
 
 import Footer from "../Components/Footer";
 
 function Course({ navigation, route }) {
+  // get the current theme
+
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
+
   const { ID } = route.params;
   const { Desc } = route.params;
   const { InPer } = route.params;
@@ -32,15 +49,37 @@ function Course({ navigation, route }) {
   const { Friday } = route.params;
 
   return (
-    <View style={styles.appContainer}>
+    <View
+      style={
+        mode == "light" ? styles.appContainer_light : styles.appContainer_dark
+      }
+    >
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
       </View>
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> {ID} </Text>
-          <Text style={styles.subtitle}>Schedule</Text>
-          <Text style={styles.bodyText}>
+          <Text
+            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+          >
+            {" "}
+            {ID}{" "}
+          </Text>
+          <Text
+            style={
+              mode == "light" ? styles.subtitle_light : styles.subtitle_dark
+            }
+          >
+            Schedule
+          </Text>
+
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextCoursePage_light
+                : styles.bodyTextCoursePage_dark
+            }
+          >
             {Online ? (
               <Text>Offered Online</Text>
             ) : (
@@ -48,100 +87,346 @@ function Course({ navigation, route }) {
             )}
           </Text>
           {Monday ? (
-            <Text style={styles.bodyText}>
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextCoursePage_light
+                  : styles.bodyTextCoursePage_dark
+              }
+            >
               Monday
               {StartTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {StartTime < 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}AM
+                    </Text>
                   ) : StartTime === 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}> {StartTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
               -
               {EndTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {EndTime < 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}AM
+                    </Text>
                   ) : EndTime === 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}>{EndTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
             </Text>
           ) : null}
           {Tuesday ? (
-            <Text style={styles.bodyText}>
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextCoursePage_light
+                  : styles.bodyTextCoursePage_dark
+              }
+            >
               Tuesday
               {StartTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {StartTime < 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}AM
+                    </Text>
                   ) : StartTime === 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}> {StartTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
               -
               {EndTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {EndTime < 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}AM
+                    </Text>
                   ) : EndTime === 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}>{EndTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
             </Text>
           ) : null}
           {Wednesday ? (
-            <Text style={styles.bodyText}>
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextCoursePage_light
+                  : styles.bodyTextCoursePage_dark
+              }
+            >
               Wednesday
               {StartTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {StartTime < 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}AM
+                    </Text>
                   ) : StartTime === 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}> {StartTime - 12}PM</Text>
+                    <Text
+                      sstyle={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
               -
               {EndTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {EndTime < 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}AM
+                    </Text>
                   ) : EndTime === 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}>{EndTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
             </Text>
           ) : null}
           {Thursday ? (
-            <Text style={styles.bodyText}>
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextCoursePage_light
+                  : styles.bodyTextCoursePage_dark
+              }
+            >
               Thursday
               {StartTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {StartTime < 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}AM
+                    </Text>
                   ) : StartTime === 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}> {StartTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
@@ -149,46 +434,153 @@ function Course({ navigation, route }) {
               {EndTime != null ? (
                 <Text style={styles.bodyText}>
                   {EndTime < 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}AM
+                    </Text>
                   ) : EndTime === 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}>{EndTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
             </Text>
           ) : null}
           {Friday ? (
-            <Text style={styles.bodyText}>
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextCoursePage_light
+                  : styles.bodyTextCoursePage_dark
+              }
+            >
               Friday
               {StartTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {StartTime < 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}AM
+                    </Text>
                   ) : StartTime === 12 ? (
-                    <Text style={styles.bodyText}> {StartTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}> {StartTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {" "}
+                      {StartTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
               -
               {EndTime != null ? (
-                <Text style={styles.bodyText}>
+                <Text
+                  style={
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark
+                  }
+                >
                   {EndTime < 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}AM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}AM
+                    </Text>
                   ) : EndTime === 12 ? (
-                    <Text style={styles.bodyText}>{EndTime}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime}PM
+                    </Text>
                   ) : (
-                    <Text style={styles.bodyText}>{EndTime - 12}PM</Text>
+                    <Text
+                      style={
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark
+                      }
+                    >
+                      {EndTime - 12}PM
+                    </Text>
                   )}
                 </Text>
               ) : null}
             </Text>
           ) : null}
-          <Text style={styles.subtitle}>Information</Text>
-          <Text style={styles.bodyText}>{Desc}</Text>
+          <Text
+            style={
+              mode == "light" ? styles.subtitle_light : styles.subtitle_dark
+            }
+          >
+            Information
+          </Text>
+          <Text
+            style={
+              mode == "light"
+                ? styles.bodyTextCoursePage_light
+                : styles.bodyTextCoursePage_dark
+            }
+          >
+            {Desc}
+          </Text>
         </View>
       </View>
 
@@ -200,149 +592,3 @@ function Course({ navigation, route }) {
 }
 
 export default Course;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  scrollView: {
-    height: 500,
-  },
-  heading: {
-    alignItems: "center",
-    fontSize: 35,
-    marginTop: 20,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  itemButton: {
-    marginTop: 20,
-
-    width: 330,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "justify",
-    padding: 10,
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  subtitle: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 10,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-    width: 120,
-    height: 62,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});
