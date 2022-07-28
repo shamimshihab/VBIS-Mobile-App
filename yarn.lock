@@ -6097,16 +6097,6 @@
     "@types/geojson" "^7946.0.7"
     "deprecated-react-native-prop-types" "^2.3.0"
 
->>>>>>> Stashed changes
-=======
-"react-native-maps@^1.0.0":
-  "integrity" "sha512-OCIehkHcCofqUL9lhzWH6E4Gzv6+Wmo9J8G0znPruyFOMerpgI8VYrwh6sneh1SRf7U/QhbJaXJsBnJ028uslw=="
-  "resolved" "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.0.0.tgz"
-  "version" "1.0.0"
-  dependencies:
-    "@types/geojson" "^7946.0.8"
-
->>>>>>> main
 "react-native-paper@^4.12.2":
   "integrity" "sha512-DDqds8E6IMbOFW7PwUgB0pP6qhFcwn/s0N+SOpqB1XYtGm0r9WMrmA8q026Mn7OCkWeMTjgnrILGJxJ7b2CRHw=="
   "resolved" "https://registry.npmjs.org/react-native-paper/-/react-native-paper-4.12.2.tgz"
