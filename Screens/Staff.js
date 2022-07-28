@@ -9,214 +9,84 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import TopHeader from "../Components/TopHeader";
 
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import Footer from "../Components/Footer";
+import { db } from "../firebase-config";
+import { getDatabase, get, ref, val } from "firebase/database";
+import { styles } from "../style/styles";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+const staffRef = ref(getDatabase(), "about/staff");
+
+let staffList = [];
+
+get(staffRef).then((snapshot) => {
+  snapshot.forEach((item) => {
+    const temp = item.val().split(":");
+    staffList.push(temp);
+  });
+});
 
 function Staff({ navigation }) {
+  // get the current theme
+
+  const theme = useSelector((state) => state.theme);
+  // initialize action dispatcher
+  const dispatch = useDispatch();
+
+  // define a component mode state
+  const [mode, setMode] = useState(theme.mode);
+
+  // Update the app Incase the theme mode changes
+  useEffect(() => {
+    setMode(theme.mode);
+  }, [theme]);
   return (
-    <View style={styles.appContainer}>
+    <View
+      style={
+        mode == "light" ? styles.appContainer_light : styles.appContainer_dark
+      }
+    >
+      {/* Top Header(VBIS logo, Settings, Tuitorial)*/}
       <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <Image
-            style={{ width: 140, height: 50 }}
-            source={require("../assets/vbisLogo.png")}
-          />
-        </View>
-
-        <Pressable
-          style={styles.setting}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/settings.png")}
-          />
-        </Pressable>
-
-        <Pressable
-          style={styles.tutorial}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Tuitorial")}
-        >
-          <Text style={styles.buttonText}> Tutorial </Text>
-        </Pressable>
+        <TopHeader navigation={navigation} />
       </View>
 
       <View style={styles.middleContainer}>
         <View>
-          <Text style={styles.heading}> Staff Members</Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Board of Directors: </Text>
-            <Text>Oversee all major VBIS initiatives. </Text>
+          {/* Heading */}
+          <Text
+            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            accessibilityRole="header"
+          >
+            Staff Members
           </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Case Managers: </Text>
-            <Text>Offer one-on-one support to VBIS clients. </Text>
-          </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • InReach Team: </Text>
-            <Text>Take in new VBIS clients. </Text>
-          </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Coordinators: </Text>
-            <Text>Manage and direct all operations and programs. </Text>
-          </Text>
-
-          <Text style={styles.bodyText}>
-            <Text style={{ fontWeight: "bold" }}> • Volunteers: </Text>
-            <Text>Frontline workers at VBIS. </Text>
-          </Text>
+          {/* Staff Members Description */}
+          {staffList.map((item) => (
+            <Text
+              style={
+                mode == "light"
+                  ? styles.bodyTextStaff_light
+                  : styles.bodyTextStaff_dark
+              }
+              key={item[0]}
+              accessible={true}
+              accessibilityRole="text"
+            >
+              <Text style={{ fontWeight: "bold" }}>{item[0]}: </Text>
+              <Text>{item[1]}</Text>
+            </Text>
+          ))}
         </View>
       </View>
 
       <View style={styles.bottomContainer}>
-        <View>
-          <Pressable
-            style={styles.bottomButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Entypo name="back" size={22} color="black" />
-            <Text style={styles.buttonText}>Back</Text>
-          </Pressable>
-        </View>
-        <View>
-          <Pressable
-            style={styles.bottomButton}
-            onPress={() => navigation.navigate("HomeScreen")}
-          >
-            <AntDesign name="home" size={22} color="black" />
-            <Text style={styles.buttonText}> Home </Text>
-          </Pressable>
-        </View>
+        <Footer navigation={navigation} />
       </View>
     </View>
   );
 }
 
 export default Staff;
-
-const styles = StyleSheet.create({
-  appContainer: {
-    padding: 20,
-    backgroundColor: "#ffffff",
-
-    height: "100%",
-  },
-
-  /*Top Header Style*/
-
-  logo: {
-    marginTop: 50,
-    marginRight: 20,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    marginLeft: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  setting: {
-    marginTop: 50,
-    marginRight: 15,
-    marginLeft: 40,
-    marginBottom: 50,
-    width: 50,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  tutorial: {
-    marginTop: 50,
-    marginRight: 10,
-    marginBottom: 50,
-    width: 100,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /*Middle*/
-  middleContainer: {
-    flexDirection: "column",
-
-    height: "70%",
-
-    justifyContent: "space-between",
-  },
-
-  heading: {
-    alignItems: "center",
-    fontSize: 30,
-    padding: 20,
-
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  bodyText: {
-    fontSize: 20,
-
-    textAlign: "left",
-    padding: 4,
-
-    color: "#000000",
-  },
-
-  buttonText: {
-    fontSize: 15,
-
-    textAlign: "center",
-    padding: 5,
-    fontWeight: "bold",
-    color: "#000000",
-  },
-
-  /*Bottom */
-  bottomContainer: {
-    flexDirection: "row",
-    height: "15%",
-
-    backgroundColor: "",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-    width: 120,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
-});

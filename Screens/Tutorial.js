@@ -8,10 +8,9 @@ import {
   Alert,
   Pressable,
   Image,
-} from "react-native"; 
-
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+} from "react-native";
+import TopHeader from "../Components/TopHeader";
+import Footer from "../Components/Footer";
 
 import { Searchbar } from "react-native-paper";
 
@@ -19,30 +18,7 @@ function Tutorial({ navigation }) {
   return (
     <View style={styles.appContainer}>
       <View style={styles.headerContainer}>
-        <View style={styles.logo}>
-          <Image
-            style={{ width: 140, height: 50 }}
-            source={require("../assets/vbisLogo.png")}
-          />
-        </View>
-
-        <Pressable
-          style={styles.setting}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Image
-            style={{ width: 40, height: 40 }}
-            source={require("../assets/settings.png")}
-          />
-        </Pressable>
-
-        <Pressable
-          style={styles.tutorial}
-          color="#f194ff"
-          onPress={() => navigation.navigate("Tutorial")}
-        >
-          <Text style={styles.buttonText}> Tutorial </Text>
-        </Pressable>
+        <TopHeader navigation={navigation} />
       </View>
 
       <View style={styles.middleContainer}>
@@ -53,24 +29,7 @@ function Tutorial({ navigation }) {
       </View>
 
       <View style={styles.bottomContainer}>
-        <View>
-          <Pressable
-            style={styles.bottomButton}
-            onPress={() => navigation.goBack()}
-          >
-            <Entypo name="back" size={22} color="black" />
-            <Text style={styles.buttonText}>Back</Text>
-          </Pressable>
-        </View>
-        <View>
-          <Pressable
-            style={styles.bottomButton}
-            onPress={() => navigation.navigate("HomeScreen")}
-          >
-            <AntDesign name="home" size={22} color="black" />
-            <Text style={styles.buttonText}> Home </Text>
-          </Pressable>
-        </View>
+        <Footer navigation={navigation} />
       </View>
     </View>
   );
