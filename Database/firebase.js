@@ -50,5 +50,54 @@ get(contactRef).then((snapshot) => {
 });
 
 //Programs
+const programsRef = ref(getDatabase(), "programs");
 
-export { about, staffList, address, email, hours, phone };
+class Program {
+  constructor(
+    name,
+    description,
+    inperson,
+    online,
+    start,
+    end,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday
+  ) {
+    this.name = name;
+    this.description = description;
+    this.inperson = inperson;
+    this.online = online;
+    this.start = start;
+    this.end = end;
+    this.monday = monday;
+    this.tuesday = tuesday;
+    this.wednesday = wednesday;
+    this.thursday = thursday;
+    this.friday = friday;
+  }
+}
+
+let programList = [];
+get(programsRef).then((snapshot) => {
+  snapshot.forEach((item) => {
+    const temp = new Program(
+      item.val().name,
+      item.val().description,
+      item.val().inperson,
+      item.val().online,
+      item.val().start,
+      item.val().end,
+      item.val().monday,
+      item.val().tuesday,
+      item.val().wednesday,
+      item.val().thursday,
+      item.val().friday
+    );
+    programList.push(temp);
+  });
+});
+
+export { about, staffList, address, email, hours, phone, programList };

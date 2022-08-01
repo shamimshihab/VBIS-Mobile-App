@@ -17,8 +17,8 @@ import { getDatabase, ref, get, child } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
-
-const programsRef = ref(getDatabase(), "programs");
+import { programList } from "../Database/firebase.js";
+/*const programsRef = ref(getDatabase(), "programs");
 
 class Program {
   constructor(
@@ -66,7 +66,7 @@ get(programsRef).then((snapshot) => {
     );
     programList.push(temp);
   });
-});
+});*/
 
 function Programs({ navigation }) {
   // get the current theme
