@@ -1,6 +1,6 @@
-import { db } from "../firebase-config.js";
+import { db } from "./firebase-config.js";
 import { getDatabase, ref, get, child } from "firebase/database";
-import { auth } from "../firebase-config.js";
+import { auth } from "./firebase-config.js";
 import { signInAnonymously } from "firebase/auth";
 
 //Authentication

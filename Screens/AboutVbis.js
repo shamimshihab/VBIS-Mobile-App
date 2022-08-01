@@ -17,7 +17,6 @@ import Footer from "../Components/Footer";
 import { styles } from "../style/styles";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { about } from "../Database/firebase.js";
 
 function AboutVbis({ navigation }) {
