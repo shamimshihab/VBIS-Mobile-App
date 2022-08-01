@@ -3,7 +3,10 @@ import { getDatabase, ref, get, child } from "firebase/database";
 import { auth } from "./firebase-config.js";
 import { signInAnonymously } from "firebase/auth";
 
-//Authentication
+/*
+Authentication
+Signs in user to an anonymous account
+*/
 signInAnonymously(auth)
   .then(() => {
     //TO DO
@@ -16,7 +19,11 @@ signInAnonymously(auth)
     //TO DO: error handling
   });
 
-//About VBIS
+/*
+About VBIS
+Creates reference to about child in database
+and gets About VBIS description
+*/
 const aboutRef = ref(getDatabase(), "about");
 
 let about = null;
@@ -25,7 +32,11 @@ get(child(aboutRef, "aboutVBIS")).then((snapshot) => {
   about = snapshot.val();
 });
 
-//Staff
+/*
+Staff
+Creates reference to staff child
+and creates list of staff members
+*/
 const staffRef = ref(getDatabase(), "about/staff");
 
 let staffList = [];
@@ -37,7 +48,11 @@ get(staffRef).then((snapshot) => {
   });
 });
 
-//Contact
+/*
+Contact
+Creates reference to contact child
+and gets contact information
+*/
 const contactRef = ref(getDatabase(), "contact");
 
 let { address, email, hours, phone } = "";
@@ -49,7 +64,12 @@ get(contactRef).then((snapshot) => {
   phone = snapshot.val().phone;
 });
 
-//Programs
+/*
+Programs
+Creates reference to programs child
+and creates Program class, then creates a
+list of Program objects
+*/
 const programsRef = ref(getDatabase(), "programs");
 
 class Program {
