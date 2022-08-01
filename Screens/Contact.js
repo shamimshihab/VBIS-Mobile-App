@@ -13,16 +13,13 @@ import {
 import TopHeader from "../Components/TopHeader";
 
 import { Ionicons } from "@expo/vector-icons";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child, val } from "firebase/database";
 //import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { Marker } from "react-native-maps";
 import Footer from "../Components/Footer";
 import { styles } from "../style/styles";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-const contactRef = ref(getDatabase(), "contact");
+import { address, email, hours, phone } from "../Database/firebase.js";
 
 const VBISRegion = {
   latitude: 48.43251013505817,
@@ -30,15 +27,6 @@ const VBISRegion = {
   latitudeDelta: 0.01,
   longitudeDelta: 0.01,
 };
-
-let { address, email, hours, phone } = "";
-
-get(contactRef).then((snapshot) => {
-  address = snapshot.val().address;
-  email = snapshot.val().email;
-  hours = snapshot.val().hours;
-  phone = snapshot.val().phone;
-});
 
 function Contact({ navigation }) {
   // get the current theme
