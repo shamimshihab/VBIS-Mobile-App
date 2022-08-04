@@ -159,8 +159,6 @@ get(otherRef).then((snapshot) => {
                 }
             });
             resourceCategoryList.push(temp);
-            console.log(temp.type);
-            console.log(temp.serviceList);
         }
     })
 })
