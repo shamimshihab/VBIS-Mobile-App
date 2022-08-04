@@ -13,6 +13,8 @@ import {
 import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
 
+import { resourceCategoryList, resourceDescription } from "../Database/firebase.js";
+
 function OtherResources({ navigation }) {
   return (
     <View style={styles.appContainer}>

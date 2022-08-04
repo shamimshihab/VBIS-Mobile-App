@@ -121,9 +121,9 @@ get(programsRef).then((snapshot) => {
 Other Resources
 Creates a reference to other resources child
 and two classes: a Resource Category and a Resource class.
-Gets a type for each category and gives it a list of services.
-Each service contains a name, description, location, 
-and phone number.
+Gets a type for each category and gives it a list of services
+(Resource objects). Each service contains a name, description, 
+location, and phone number.
 */
 const otherRef = ref(getDatabase(), "otherResources");
 
