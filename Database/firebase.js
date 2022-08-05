@@ -22,7 +22,8 @@ signInAnonymously(auth)
 /*
 About VBIS
 Creates reference to about child in database
-and gets About VBIS description
+and gets About VBIS description.
+Listens for changes and updates variable.
 */
 const aboutRef = ref(getDatabase(), "about");
 
@@ -34,7 +35,8 @@ onValue(child(aboutRef, "aboutVBIS"), (snapshot) => {
 
 /*
 Staff
-Creates list of staff members
+Creates list of staff members.
+Listens for changes and updates list.
 */
 let staffList = [];
 
@@ -49,8 +51,8 @@ onChildChanged(child(aboutRef, "staff"), (snapshot) => {
     });
 
     const temp = snapshot.val().split(":");
-    temp.push(snapshot.key);
-    staffList[index] = temp;
+    staffList[index][0] = temp[0];
+    staffList[index][1] = temp[1];
 });
 onChildRemoved(child(aboutRef, "staff"), (snapshot) => {
     const index = staffList.findIndex((item) => {
@@ -63,7 +65,8 @@ onChildRemoved(child(aboutRef, "staff"), (snapshot) => {
 /*
 Contact
 Creates reference to contact child
-and gets contact information
+and gets contact information.
+Listens for changes and updates all contact info.
 */
 const contactRef = ref(getDatabase(), "contact");
 
@@ -80,7 +83,8 @@ onValue(contactRef, (snapshot) => {
 Programs
 Creates reference to programs child
 and creates Program class, then creates a
-list of Program objects
+list of Program objects.
+Listens for changes and updates list.
 */
 const programsRef = ref(getDatabase(), "programs");
 
@@ -112,45 +116,37 @@ class Program {
     this.thursday = thursday;
     this.friday = friday;
   }
+
+  update(
+    name, 
+    description, 
+    inperson, 
+    online, 
+    start, 
+    end, 
+    monday, 
+    tuesday, 
+    wednesday, 
+    thursday, 
+    friday
+    ) {
+    this.name = name;
+    this.description = description;
+    this.inperson = inperson;
+    this.online = online;
+    this.start = start;
+    this.end = end;
+    this.monday = monday;
+    this.tuesday = tuesday;
+    this.wednesday = wednesday;
+    this.thursday = thursday;
+    this.friday = friday;
+  }
 }
 
 let programList = [];
-/*get(programsRef).then((snapshot) => {
-  snapshot.forEach((item) => {
-    const temp = new Program(
-      item.val().name,
-      item.val().description,
-      item.val().inperson,
-      item.val().online,
-      item.val().start,
-      item.val().end,
-      item.val().monday,
-      item.val().tuesday,
-      item.val().wednesday,
-      item.val().thursday,
-      item.val().friday
-    );
-    programList.push(temp);
-  });
-});*/
+
 onChildAdded(programsRef, (snapshot) => {
-    /*programList = [];
-    snapshot.forEach((item) => {
-      const temp = new Program(
-        item.val().name,
-        item.val().description,
-        item.val().inperson,
-        item.val().online,
-        item.val().start,
-        item.val().end,
-        item.val().monday,
-        item.val().tuesday,
-        item.val().wednesday,
-        item.val().thursday,
-        item.val().friday
-      );
-      programList.push(temp);
-    });*/
     const temp = new Program(
         snapshot.key,
         snapshot.val().name,
@@ -172,17 +168,18 @@ onChildChanged(programsRef, (snapshot) => {
         return item.key === snapshot.key;
     });
 
-    programList[index].name = snapshot.val().name;
-    programList[index].description = snapshot.val().description;
-    programList[index].inperson = snapshot.val().inperson;
-    programList[index].online = snapshot.val().online;
-    programList[index].start = snapshot.val().start;
-    programList[index].end = snapshot.val().end;
-    programList[index].monday = snapshot.val().monday;
-    programList[index].tuesday = snapshot.val().tuesday;
-    programList[index].wednesday = snapshot.val().wednesday;
-    programList[index].thursday = snapshot.val().thursday;
-    programList[index].friday = snapshot.val().friday;
+    programList[index].update(
+        snapshot.val().name, 
+        snapshot.val().description, 
+        snapshot.val().inperson, 
+        snapshot.val().online, 
+        snapshot.val().start, 
+        snapshot.val().end, 
+        snapshot.val().monday, 
+        snapshot.val().tuesday, 
+        snapshot.val().wednesday, 
+        snapshot.val().thursday, 
+        snapshot.val().friday);
 });
 onChildRemoved(programsRef, (snapshot) => {
     const index = programList.findIndex((item) => {
@@ -220,7 +217,12 @@ class ResourceCategory {
         const serviceRef = child(otherRef, `${this.key}`);
         onChildAdded(serviceRef, (snapshot) => {
             if(snapshot.key != "type") {
-                const tempService = new Resource(snapshot.val().name, snapshot.val().description, snapshot.val().location, snapshot.val().phone);
+                const tempService = new Resource(
+                    snapshot.val().name, 
+                    snapshot.val().description, 
+                    snapshot.val().location, 
+                    snapshot.val().phone
+                    );
                 this.serviceList.push(tempService);
             }
         });
@@ -229,7 +231,12 @@ class ResourceCategory {
                 const index = this.serviceList.findIndex((item) => {
                     item.key === snapshot.key;
                 });
-                this.serviceList[index].update(snapshot.val().name, snapshot.val().description, snapshot.val().location, snapshot.val().phone);
+                this.serviceList[index].update(
+                    snapshot.val().name, 
+                    snapshot.val().description, 
+                    snapshot.val().location, 
+                    snapshot.val().phone
+                    );
             }
         });
         onChildRemoved(serviceRef, (snapshot) => {
@@ -267,20 +274,6 @@ onValue(child(otherRef, "description"), (snapshot) => {
     resourceDescription = snapshot.val();
 });
 
-/*get(otherRef).then((snapshot) => {
-    snapshot.forEach((item) => {
-        if(item.key != "description"){
-            const temp = new ResourceCategory(item.val().type);
-            item.forEach((service) => {
-                if(service.key != "type"){
-                    const tempService = new Resource(service.val().name, service.val().description, service.val().location, service.val().phone);
-                    temp.serviceList.push(tempService);
-                }
-            });
-            resourceCategoryList.push(temp);
-        }
-    });
-});*/
 onChildAdded(otherRef, (snapshot) => {
     if(snapshot.key != "description") {
         const temp = new ResourceCategory(snapshot.key, snapshot.val().type);
