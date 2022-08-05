@@ -47,16 +47,15 @@ onChildAdded(child(aboutRef, "staff"), (snapshot) => {
 });
 onChildChanged(child(aboutRef, "staff"), (snapshot) => {
     const index = staffList.findIndex((item) => {
-        item[2] === snapshot.key;
+        return item[2] === snapshot.key;
     });
-
     const temp = snapshot.val().split(":");
     staffList[index][0] = temp[0];
     staffList[index][1] = temp[1];
 });
 onChildRemoved(child(aboutRef, "staff"), (snapshot) => {
     const index = staffList.findIndex((item) => {
-        item[2] === snapshot.key;
+        return item[2] === snapshot.key;
     });
 
     staffList.splice(index, 1);
@@ -72,11 +71,17 @@ const contactRef = ref(getDatabase(), "contact");
 
 let { address, email, hours, phone } = "";
 
-onValue(contactRef, (snapshot) => {
-  address = snapshot.val().address;
-  email = snapshot.val().email;
-  hours = snapshot.val().hours;
-  phone = snapshot.val().phone;
+onValue(child(contactRef, "address"), (snapshot) => {
+    address = snapshot.val();
+});
+onValue(child(contactRef, "email"), (snapshot) => {
+    email = snapshot.val();
+});
+onValue(child(contactRef, "hours"), (snapshot) => {
+    hours = snapshot.val();
+});
+onValue(child(contactRef, "phone"), (snapshot) => {
+    phone = snapshot.val();
 });
 
 /*
@@ -179,7 +184,8 @@ onChildChanged(programsRef, (snapshot) => {
         snapshot.val().tuesday, 
         snapshot.val().wednesday, 
         snapshot.val().thursday, 
-        snapshot.val().friday);
+        snapshot.val().friday
+    );
 });
 onChildRemoved(programsRef, (snapshot) => {
     const index = programList.findIndex((item) => {
@@ -209,7 +215,7 @@ class ResourceCategory {
 
     listenForType() {
         onValue(child(otherRef, `${this.key}/type`), (snapshot) => {
-        this.type = snapshot.val();
+            this.type = snapshot.val();
         });
     }
 
@@ -218,31 +224,32 @@ class ResourceCategory {
         onChildAdded(serviceRef, (snapshot) => {
             if(snapshot.key != "type") {
                 const tempService = new Resource(
+                    snapshot.key,
                     snapshot.val().name, 
                     snapshot.val().description, 
                     snapshot.val().location, 
                     snapshot.val().phone
-                    );
+                );
                 this.serviceList.push(tempService);
             }
         });
         onChildChanged(serviceRef, (snapshot) => {
             if(snapshot.key != "type") {
                 const index = this.serviceList.findIndex((item) => {
-                    item.key === snapshot.key;
+                    return item.key === snapshot.key;
                 });
                 this.serviceList[index].update(
                     snapshot.val().name, 
                     snapshot.val().description, 
                     snapshot.val().location, 
                     snapshot.val().phone
-                    );
+                );
             }
         });
         onChildRemoved(serviceRef, (snapshot) => {
             if(snapshot.key != "type") {
                 const index = this.serviceList.findIndex((item) => {
-                    item.key === snapshot.key;
+                    return item.key === snapshot.key;
                 });
                 this.serviceList.splice(index, 1);
             }
@@ -252,7 +259,8 @@ class ResourceCategory {
 }
 
 class Resource {
-    constructor(name, description, location, phone){
+    constructor(key, name, description, location, phone){
+        this.key = key;
         this.name = name;
         this.description = description;
         this.location = location;
@@ -279,17 +287,16 @@ onChildAdded(otherRef, (snapshot) => {
         const temp = new ResourceCategory(snapshot.key, snapshot.val().type);
         temp.listenForType();
         temp.listenForServices();
-        resourceCategoryList.push(temp);
-        
+        resourceCategoryList.push(temp); 
     }
 });
 onChildRemoved(otherRef, (snapshot) => {
     if(snapshot.key != "description") {
         const index = resourceCategoryList.findIndex((item) => {
-            item.key === snapshot.key;
+            return item.key === snapshot.key;
         });
         resourceCategoryList.splice(index, 1);
     }
-})
+});
 
 export { about, staffList, address, email, hours, phone, programList, resourceDescription, resourceCategoryList };
