@@ -1,5 +1,5 @@
 import { db } from "./firebase-config.js";
-import { getDatabase, ref, get, child, onValue, onChildAdded, onChildChanged, onChildRemoved } from "firebase/database";
+import { getDatabase, ref, get, child, onValue, onChildAdded, onChildChanged, onChildRemoved, orderByValue, query, orderByChild } from "firebase/database";
 import { auth } from "./firebase-config.js";
 import { signInAnonymously } from "firebase/auth";
 
@@ -38,14 +38,17 @@ Staff
 Creates list of staff members.
 Listens for changes and updates list.
 */
+const staffRef = child(aboutRef, "staff");
+const staffQuery = query(staffRef, orderByValue());
 let staffList = [];
 
-onChildAdded(child(aboutRef, "staff"), (snapshot) => {
+onChildAdded(staffQuery, (snapshot) => {
     const temp = snapshot.val().split(":");
     temp.push(snapshot.key);
     staffList.push(temp);
+    staffList.sort();
 });
-onChildChanged(child(aboutRef, "staff"), (snapshot) => {
+onChildChanged(staffRef, (snapshot) => {
     const index = staffList.findIndex((item) => {
         return item[2] === snapshot.key;
     });
@@ -53,7 +56,7 @@ onChildChanged(child(aboutRef, "staff"), (snapshot) => {
     staffList[index][0] = temp[0];
     staffList[index][1] = temp[1];
 });
-onChildRemoved(child(aboutRef, "staff"), (snapshot) => {
+onChildRemoved(staffRef, (snapshot) => {
     const index = staffList.findIndex((item) => {
         return item[2] === snapshot.key;
     });
@@ -92,6 +95,7 @@ list of Program objects.
 Listens for changes and updates list.
 */
 const programsRef = ref(getDatabase(), "programs");
+const programsQuery = query(programsRef, orderByChild("priority"));
 
 class Program {
   constructor(
@@ -124,7 +128,7 @@ class Program {
 
   update(
     name, 
-    description, 
+    description,
     inperson, 
     online, 
     start, 
@@ -151,7 +155,7 @@ class Program {
 
 let programList = [];
 
-onChildAdded(programsRef, (snapshot) => {
+onChildAdded(programsQuery, (snapshot) => {
     const temp = new Program(
         snapshot.key,
         snapshot.val().name,
@@ -166,16 +170,21 @@ onChildAdded(programsRef, (snapshot) => {
         snapshot.val().thursday,
         snapshot.val().friday
     );
-    programList.push(temp);
+    const index = snapshot.val().priority - 1;
+    if(index >= programList.length){
+        programList.push(temp);
+    }else{
+        programList.splice(index, 0, temp);
+    }
 });
 onChildChanged(programsRef, (snapshot) => {
     const index = programList.findIndex((item) => {
         return item.key === snapshot.key;
     });
-
-    programList[index].update(
+    const temp = programList[index];
+    temp.update(
         snapshot.val().name, 
-        snapshot.val().description, 
+        snapshot.val().description,
         snapshot.val().inperson, 
         snapshot.val().online, 
         snapshot.val().start, 
@@ -186,12 +195,17 @@ onChildChanged(programsRef, (snapshot) => {
         snapshot.val().thursday, 
         snapshot.val().friday
     );
+
+    if(index != snapshot.val().priority - 1){
+        const newIndex = snapshot.val().priority - 1;
+        programList.splice(index, 1);
+        programList.splice(newIndex, 0, temp);
+    }
 });
 onChildRemoved(programsRef, (snapshot) => {
     const index = programList.findIndex((item) => {
         return item.key === snapshot.key;
     });
-
     programList.splice(index, 1);
 });
 
