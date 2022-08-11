@@ -18,19 +18,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
 
 function Footer({ navigation }) {
-  // get the current theme
+  // get the current theme & font size
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
+
   return (
     <View style={styles.bottomContainer}>
       <View>
@@ -53,7 +60,7 @@ function Footer({ navigation }) {
           />
           <Text
             style={
-              mode == "light" ? styles.buttonText_light : styles.buttonText_dark
+              [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
             }
           >
             Back
@@ -80,7 +87,7 @@ function Footer({ navigation }) {
           />
           <Text
             style={
-              mode == "light" ? styles.buttonText_light : styles.buttonText_dark
+              [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
             }
           >
             Home{" "}

@@ -455,6 +455,36 @@ export const styles = StyleSheet.create({
     borderRadius: 7.5,
   },
 
+  fontSizeChangeContainer: {
+    flexDirection: "row",
+    height: "15%",
+    backgroundColor: "",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  font_size_setting_light: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#d3d3d3",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 7.5,
+  },
+
+  font_size_setting_dark: {
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 7.5,
+  },
+
   /*Contact Page*/
 
   callButton_light: {
@@ -509,7 +539,7 @@ export const styles = StyleSheet.create({
   itemButton_light: {
     marginTop: 20,
     width: 330,
-    height: 50,
+    height: "auto",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#d3d3d3",
@@ -520,7 +550,7 @@ export const styles = StyleSheet.create({
   itemButton_dark: {
     marginTop: 20,
     width: 330,
-    height: 50,
+    height: "auto",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
