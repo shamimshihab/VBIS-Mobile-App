@@ -22,19 +22,30 @@ import { styles } from "../style/styles";
 import Footer from "../Components/Footer";
 
 function Course({ navigation, route }) {
-  // get the current theme
+  // get the current theme & font size
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [bodySize, setBodySize] = useState(fontSize.bodySize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setBodySize(fontSize.bodySize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setSubtitleSize(fontSize.subtitleSize);
+  }, [fontSize]);
 
   const { ID } = route.params;
   const { Desc } = route.params;
@@ -60,14 +71,16 @@ function Course({ navigation, route }) {
       <View style={styles.middleContainer}>
         <View>
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            style={
+              [mode == "light" ? styles.heading_light : styles.heading_dark, {fontSize: subtitleSize}]
+            }
           >
             {" "}
             {ID}{" "}
           </Text>
           <Text
             style={
-              mode == "light" ? styles.subtitle_light : styles.subtitle_dark
+              [mode == "light" ? styles.subtitle_light : styles.subtitle_dark, {fontSize: subtitleSize}]
             }
           >
             Schedule
@@ -75,9 +88,7 @@ function Course({ navigation, route }) {
 
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextCoursePage_light
-                : styles.bodyTextCoursePage_dark
+              [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
             }
           >
             {Online ? (
@@ -89,26 +100,20 @@ function Course({ navigation, route }) {
           {Monday ? (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextCoursePage_light
-                  : styles.bodyTextCoursePage_dark
+                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
               }
             >
               Monday
               {StartTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {StartTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -117,9 +122,7 @@ function Course({ navigation, route }) {
                   ) : StartTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -128,9 +131,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -143,17 +144,13 @@ function Course({ navigation, route }) {
               {EndTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {EndTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}AM
@@ -161,9 +158,7 @@ function Course({ navigation, route }) {
                   ) : EndTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}PM
@@ -171,9 +166,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime - 12}PM
@@ -186,26 +179,20 @@ function Course({ navigation, route }) {
           {Tuesday ? (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextCoursePage_light
-                  : styles.bodyTextCoursePage_dark
+                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
               }
             >
               Tuesday
               {StartTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {StartTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -214,9 +201,7 @@ function Course({ navigation, route }) {
                   ) : StartTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -225,9 +210,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -240,17 +223,13 @@ function Course({ navigation, route }) {
               {EndTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {EndTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}AM
@@ -258,9 +237,7 @@ function Course({ navigation, route }) {
                   ) : EndTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}PM
@@ -268,9 +245,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime - 12}PM
@@ -283,26 +258,20 @@ function Course({ navigation, route }) {
           {Wednesday ? (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextCoursePage_light
-                  : styles.bodyTextCoursePage_dark
+                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
               }
             >
               Wednesday
               {StartTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {StartTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -311,9 +280,7 @@ function Course({ navigation, route }) {
                   ) : StartTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -322,9 +289,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       sstyle={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -337,17 +302,13 @@ function Course({ navigation, route }) {
               {EndTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {EndTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}AM
@@ -355,9 +316,7 @@ function Course({ navigation, route }) {
                   ) : EndTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}PM
@@ -365,9 +324,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime - 12}PM
@@ -380,26 +337,20 @@ function Course({ navigation, route }) {
           {Thursday ? (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextCoursePage_light
-                  : styles.bodyTextCoursePage_dark
+                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
               }
             >
               Thursday
               {StartTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {StartTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -408,9 +359,7 @@ function Course({ navigation, route }) {
                   ) : StartTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -419,9 +368,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -436,9 +383,7 @@ function Course({ navigation, route }) {
                   {EndTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}AM
@@ -446,9 +391,7 @@ function Course({ navigation, route }) {
                   ) : EndTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}PM
@@ -456,9 +399,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime - 12}PM
@@ -471,26 +412,20 @@ function Course({ navigation, route }) {
           {Friday ? (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextCoursePage_light
-                  : styles.bodyTextCoursePage_dark
+                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
               }
             >
               Friday
               {StartTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {StartTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -499,9 +434,7 @@ function Course({ navigation, route }) {
                   ) : StartTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -510,9 +443,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {" "}
@@ -525,17 +456,13 @@ function Course({ navigation, route }) {
               {EndTime != null ? (
                 <Text
                   style={
-                    mode == "light"
-                      ? styles.bodyTextCoursePage_light
-                      : styles.bodyTextCoursePage_dark
+                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                   }
                 >
                   {EndTime < 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}AM
@@ -543,9 +470,7 @@ function Course({ navigation, route }) {
                   ) : EndTime === 12 ? (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime}PM
@@ -553,9 +478,7 @@ function Course({ navigation, route }) {
                   ) : (
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.bodyTextCoursePage_light
-                          : styles.bodyTextCoursePage_dark
+                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
                       }
                     >
                       {EndTime - 12}PM
@@ -567,16 +490,14 @@ function Course({ navigation, route }) {
           ) : null}
           <Text
             style={
-              mode == "light" ? styles.subtitle_light : styles.subtitle_dark
+              [mode == "light" ? styles.subtitle_light : styles.subtitle_dark, {fontSize: subtitleSize}]
             }
           >
             Information
           </Text>
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextCoursePage_light
-                : styles.bodyTextCoursePage_dark
+              [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
             }
           >
             {Desc}

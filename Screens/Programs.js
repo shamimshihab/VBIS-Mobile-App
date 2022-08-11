@@ -18,19 +18,31 @@ import { styles } from "../style/styles";
 import { programList } from "../Database/firebase.js";
 
 function Programs({ navigation }) {
-  // get the current theme
+  // get the current theme & font size
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setSubtitleSize(fontSize.subtitleSize);
+  }, [fontSize]);
+
   return (
     <View
       style={
@@ -45,7 +57,9 @@ function Programs({ navigation }) {
         <View>
           {/* Heading*/}
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            style={
+              [mode == "light" ? styles.heading_light : styles.heading_dark, {fontSize: subtitleSize}]
+            }
           >
             {" "}
             Programs{" "}
@@ -85,9 +99,7 @@ function Programs({ navigation }) {
                   >
                     <Text
                       style={
-                        mode == "light"
-                          ? styles.buttonText_light
-                          : styles.buttonText_dark
+                        [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
                       }
                     >
                       {item.name}

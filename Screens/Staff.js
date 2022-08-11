@@ -18,19 +18,36 @@ import { useSelector, useDispatch } from "react-redux";
 import { staffList } from "../Database/firebase.js";
 
 function Staff({ navigation }) {
-  // get the current theme
+  // get the current theme & font size
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
+  const [bodySize, setBodySize] = useState(fontSize.bodySize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setBodySize(fontSize.bodySize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setSubtitleSize(fontSize.subtitleSize);
+  }, [fontSize]);
+
   return (
     <View
       style={
@@ -46,7 +63,9 @@ function Staff({ navigation }) {
         <View>
           {/* Heading */}
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            style={
+              [mode == "light" ? styles.heading_light : styles.heading_dark, {fontSize: subtitleSize}]
+            }
             accessibilityRole="header"
           >
             Staff Members
@@ -55,9 +74,7 @@ function Staff({ navigation }) {
           {staffList.map((item) => (
             <Text
               style={
-                mode == "light"
-                  ? styles.bodyTextStaff_light
-                  : styles.bodyTextStaff_dark
+                [mode == "light" ? styles.bodyTextStaff_light : styles.bodyTextStaff_dark, {fontSize: bodySize}]
               }
               key={item[0]}
               accessible={true}
