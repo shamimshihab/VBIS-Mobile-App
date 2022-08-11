@@ -25,22 +25,6 @@ import Tutorial from "./Screens/Tutorial";
 import Course from "./Screens/Course.js";
 import Staff from "./Screens/Staff";
 
-//Authentication
-import { auth } from "./firebase-config.js";
-import { signInAnonymously } from "firebase/auth";
-
-signInAnonymously(auth)
-  .then(() => {
-    //TO DO
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
-    //TO DO: error handling
-  });
-
 // Redux for Theme
 import { Provider } from "react-redux";
 import configureStore from "./redux-store/store";

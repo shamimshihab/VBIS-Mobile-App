@@ -12,22 +12,12 @@ import {
 import TopHeader from "../Components/TopHeader";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child } from "firebase/database";
 import Staff from "./Staff";
 import Footer from "../Components/Footer";
 import { styles } from "../style/styles";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-const aboutRef = ref(getDatabase(), "about");
-
-let about = null;
-
-get(child(aboutRef, "aboutVBIS")).then((snapshot) => {
-  about = snapshot.val();
-});
+import { about } from "../Database/firebase.js";
 
 function AboutVbis({ navigation }) {
   // get the current theme

@@ -12,22 +12,10 @@ import {
 import TopHeader from "../Components/TopHeader";
 
 import Footer from "../Components/Footer";
-import { db } from "../firebase-config";
-import { getDatabase, get, ref, val } from "firebase/database";
 import { styles } from "../style/styles";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-const staffRef = ref(getDatabase(), "about/staff");
-
-let staffList = [];
-
-get(staffRef).then((snapshot) => {
-  snapshot.forEach((item) => {
-    const temp = item.val().split(":");
-    staffList.push(temp);
-  });
-});
+import { staffList } from "../Database/firebase.js";
 
 function Staff({ navigation }) {
   // get the current theme
