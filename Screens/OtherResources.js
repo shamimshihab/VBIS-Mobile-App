@@ -16,17 +16,6 @@ import Footer from "../Components/Footer";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getDatabase,
-  ref,
-  get,
-  child,
-  onValue,
-  onChildAdded,
-  onChildChanged,
-  onChildRemoved,
-} from "firebase/database";
-import { signInAnonymously } from "firebase/auth";
 
 import { styles } from "../style/styles";
 import ServiceList from "./ServiceList";
