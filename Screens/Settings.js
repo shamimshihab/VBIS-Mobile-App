@@ -215,7 +215,7 @@ function Settings({ navigation }) {
                 source={
                   mode == "light"
                     ? require("../assets/increaseButton.png")
-                    : require("../assets/increaseButton.png")
+                    : require("../assets/increaseButton_dark.png")
                 }
               />
             </Pressable>
@@ -244,7 +244,7 @@ function Settings({ navigation }) {
                 source={
                   mode == "light"
                     ? require("../assets/decreaseButton.png")
-                    : require("../assets/decreaseButton.png")
+                    : require("../assets/decreaseButton_dark.png")
                 }
               />
             </Pressable>
