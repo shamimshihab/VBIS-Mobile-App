@@ -13,16 +13,13 @@ import {
 import TopHeader from "../Components/TopHeader";
 
 import { Ionicons } from "@expo/vector-icons";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child, val } from "firebase/database";
 //import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { Marker } from "react-native-maps";
 import Footer from "../Components/Footer";
 import { styles } from "../style/styles";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-const contactRef = ref(getDatabase(), "contact");
+import { address, email, hours, phone } from "../Database/firebase.js";
 
 const VBISRegion = {
   latitude: 48.43251013505817,
@@ -31,29 +28,36 @@ const VBISRegion = {
   longitudeDelta: 0.01,
 };
 
-let { address, email, hours, phone } = "";
-
-get(contactRef).then((snapshot) => {
-  address = snapshot.val().address;
-  email = snapshot.val().email;
-  hours = snapshot.val().hours;
-  phone = snapshot.val().phone;
-});
-
 function Contact({ navigation }) {
-  // get the current theme
+  // get the current theme & font size
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
+  const [bodySize, setBodySize] = useState(fontSize.bodySize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setBodySize(fontSize.bodySize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setSubtitleSize(fontSize.subtitleSize);
+  }, [fontSize]);
 
   const triggerCall = () => {
     const args = {
@@ -80,7 +84,9 @@ function Contact({ navigation }) {
         <View>
           {/* Heading */}
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            style={
+              [mode == "light" ? styles.heading_light : styles.heading_dark, {fontSize: subtitleSize}]
+          }
             accessibilityRole="header"
           >
             Contact
@@ -88,9 +94,7 @@ function Contact({ navigation }) {
           {/* Contact Description */}
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextContact_light
-                : styles.bodyTextContact_dark
+              [mode == "light" ? styles.bodyTextContact_light : styles.bodyTextContact_dark, {fontSize: bodySize}]
             }
             accessibilityRole="text"
           >
@@ -99,9 +103,7 @@ function Contact({ navigation }) {
           </Text>
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextContact_light
-                : styles.bodyTextContact_dark
+              [mode == "light" ? styles.bodyTextContact_light : styles.bodyTextContact_dark, {fontSize: bodySize}]
             }
             accessibilityRole="text"
           >
@@ -110,9 +112,7 @@ function Contact({ navigation }) {
           </Text>
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextContact_light
-                : styles.bodyTextContact_dark
+              [mode == "light" ? styles.bodyTextContact_light : styles.bodyTextContact_dark, {fontSize: bodySize}]
             }
             accessibilityRole="text"
           >
@@ -121,9 +121,7 @@ function Contact({ navigation }) {
           </Text>
           <Text
             style={
-              mode == "light"
-                ? styles.bodyTextContact_light
-                : styles.bodyTextContact_dark
+              [mode == "light" ? styles.bodyTextContact_light : styles.bodyTextContact_dark, {fontSize: bodySize}]
             }
             accessibilityRole="text"
           >
@@ -135,7 +133,7 @@ function Contact({ navigation }) {
               accessible={true}
               accessibilityRole="button"
               accessibilityLabel="Call VBIS"
-              accessibilityHint="Phone the VBIS front desk"
+              accessibilityHint="Open Phone app to call the VBIS front desk"
               onPress={triggerCall}
               style={
                 mode == "light"
@@ -146,9 +144,7 @@ function Contact({ navigation }) {
               <Ionicons name="call" size={24} color="black" />
               <Text
                 style={
-                  mode == "light"
-                    ? styles.buttonText_light
-                    : styles.buttonText_dark
+                  [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
                 }
               >
                 Call Us

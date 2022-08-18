@@ -8,20 +8,24 @@ import {
   Alert,
   Pressable,
   Image,
-  RadioButton,
 } from "react-native";
 
-import { styles } from "../style/styles";
 import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
-// redux hooks
+import { changeSize } from "../redux-store/fontActions";
+import { styles } from "../style/styles";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  BUTTON_FONT_CHANGE,
+  BODY_FONT_CHANGE,
+  SUBTITLE_FONT_CHANGE,
+} from "../redux-store/fontConstants";
 // actions
 import { switchMode } from "../redux-store/actions";
-// component state management
-import { useEffect, useState } from "react";
 //Radio Group
-import RadioGroup, { RadioButtonProps } from "react-native-radio-buttons-group";
+import RadioGroup from "react-native-radio-buttons-group";
+
 const radioButtonsData = [
   {
     id: "0", // acts as primary key, should be unique and non-empty string
@@ -38,42 +42,106 @@ const radioButtonsData = [
     color: "black",
   },
 ];
+
 function Settings({ navigation }) {
-  // get the current theme
+  // get the current theme & font size
+
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
+
+  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
   // initialize action dispatcher
   const dispatch = useDispatch();
+
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
+  const [bodySize, setBodySize] = useState(fontSize.bodySize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
+
   // Handle changing the theme mode
 
-  // Update the app Incase the theme mode changes
+  const handleFontSizeIncrease = () => {
+    dispatch(
+      changeSize(
+        BUTTON_FONT_CHANGE,
+        fontSize.buttonSize + 5 <= 25 ? buttonSize + 5 : buttonSize
+      )
+    );
+    dispatch(
+      changeSize(
+        BODY_FONT_CHANGE,
+        fontSize.bodySize + 5 <= 30 ? bodySize + 5 : bodySize
+      )
+    );
+    dispatch(
+      changeSize(
+        SUBTITLE_FONT_CHANGE,
+        fontSize.subtitleSize + 5 <= 35 ? subtitleSize + 5 : subtitleSize
+      )
+    );
+  };
+
+  const handleFontSizeDecrease = () => {
+    dispatch(
+      changeSize(
+        BUTTON_FONT_CHANGE,
+        fontSize.buttonSize - 5 >= 16 ? buttonSize - 5 : buttonSize
+      )
+    );
+    dispatch(
+      changeSize(
+        BODY_FONT_CHANGE,
+        fontSize.bodySize - 5 >= 19 ? bodySize - 5 : bodySize
+      )
+    );
+    dispatch(
+      changeSize(
+        SUBTITLE_FONT_CHANGE,
+        fontSize.subtitleSize - 5 >= 29 ? subtitleSize - 5 : subtitleSize
+      )
+    );
+  };
+
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
 
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setBodySize(fontSize.bodySize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    setSubtitleSize(fontSize.subtitleSize);
+  }, [fontSize]);
 
   const onPressRadioButton = function (radioButtonsArray) {
+    const handleLightThemeChange = () => {
+      dispatch(switchMode(theme.mode === "light" ? "light" : "light"));
+    };
+
+    const handleDarkThemeChange = () => {
+      dispatch(switchMode(theme.mode === "light" ? "dark" : "dark"));
+    };
+
     setRadioButtons(radioButtonsArray);
     if (radioButtonsArray[0].selected === true) {
-      const handleThemeChange = () => {
-        dispatch(switchMode(theme.mode === "light" ? "light" : "light"));
-      };
-
-      dispatch(switchMode(theme.mode === "light" ? "light" : "light"));
+      handleLightThemeChange();
       radioButtonsArray[0].labelStyle = { color: "black", marginRight: 60 };
       radioButtonsArray[1].labelStyle = { color: "black" };
       radioButtonsArray[1].color = "black";
       radioButtonsArray[0].color = "black";
     } else if (radioButtonsArray[1].selected === true) {
-      dispatch(switchMode(theme.mode === "light" ? "dark" : "dark"));
+      handleDarkThemeChange();
       radioButtonsArray[1].color = "white";
       radioButtonsArray[0].color = "white";
       radioButtonsArray[0].labelStyle = { color: "white", marginRight: 60 };
       radioButtonsArray[1].labelStyle = { color: "white" };
-    } else {
-      // nothing
     }
   };
 
@@ -83,26 +151,34 @@ function Settings({ navigation }) {
         mode == "light" ? styles.appContainer_light : styles.appContainer_dark
       }
     >
+      {/* Top Header(VBIS logo, Settings, Tuitorial)*/}
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
-        {console.log}
       </View>
+
       <View style={styles.middleContainer}>
         <View>
+          {/* Heading*/}
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
+            style={[
+              mode == "light" ? styles.heading_light : styles.heading_dark,
+              { fontSize: subtitleSize },
+            ]}
+            accessibilityRole="header"
           >
-            {" "}
-            Settings{" "}
+            Settings
           </Text>
+
           <View style={styles.themeChange}>
             <Text
-              style={
-                mode == "light" ? styles.bodyText_light : styles.bodyText_dark
-              }
+              style={[
+                mode == "light" ? styles.bodyText_light : styles.bodyText_dark,
+                { fontSize: bodySize },
+              ]}
             >
               You are on {theme.mode} mode!
             </Text>
+
             <View style={styles.photoThemeChange}>
               <Image
                 style={{ width: 100, height: 150, marginLeft: 70 }}
@@ -115,17 +191,67 @@ function Settings({ navigation }) {
               />
             </View>
 
-            <View>
-              <RadioGroup
-                radioButtons={radioButtons}
-                onPress={onPressRadioButton}
-                layout="row"
+            <RadioGroup
+              radioButtons={radioButtons}
+              onPress={onPressRadioButton}
+              layout="row"
+            />
+          </View>
+          <View style={styles.fontSizeChangeContainer}>
+            <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Increase"
+              accessibilityHint="Increase font size"
+              style={
+                mode == "light"
+                  ? styles.font_size_setting_light
+                  : styles.font_size_setting_dark
+              }
+              onPress={handleFontSizeIncrease}
+            >
+              <Image
+                style={{ width: 40, height: 40 }}
+                source={
+                  mode == "light"
+                    ? require("../assets/increaseButton.png")
+                    : require("../assets/increaseButton.png")
+                }
               />
-            </View>
+            </Pressable>
+            <Text
+              style={[
+                mode == "light" ? styles.bodyText_light : styles.bodyText_dark,
+                { fontSize: bodySize },
+              ]}
+            >
+              FONT SIZE
+            </Text>
+            <Pressable
+              accessible={true}
+              accessibilityRole="button"
+              accessibilityLabel="Decrease"
+              accessibilityHint="Decrease font size"
+              style={
+                mode == "light"
+                  ? styles.font_size_setting_light
+                  : styles.font_size_setting_dark
+              }
+              onPress={handleFontSizeDecrease}
+            >
+              <Image
+                style={{ width: 40, height: 40 }}
+                source={
+                  mode == "light"
+                    ? require("../assets/decreaseButton.png")
+                    : require("../assets/decreaseButton.png")
+                }
+              />
+            </Pressable>
           </View>
         </View>
       </View>
-
+      {/* Footer of the page(Back Button, Home Button)*/}
       <View style={styles.bottomContainer}>
         <Footer navigation={navigation} />
       </View>

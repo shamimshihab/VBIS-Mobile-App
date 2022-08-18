@@ -14,8 +14,17 @@ import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { db } from "../firebase-config.js";
-import { getDatabase, ref, get, child } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  get,
+  child,
+  onValue,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+} from "firebase/database";
+
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
@@ -26,16 +35,24 @@ function Service({ navigation, route }) {
   // get the current theme
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
+  const [subtitleSize, setSubtitleSize] = useState(fontSize.subtitleSize);
+  const [bodySize, setBodySize] = useState(fontSize.bodySize);
 
-  // Update the app Incase the theme mode changes
+  // Update the app Incase the theme mode changes / font size changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize]);
 
   const { Service } = route.params;
   const { Type } = route.params;
@@ -55,8 +72,10 @@ function Service({ navigation, route }) {
         <View>
           {/* Heading*/}
           <Text
-            style={mode == "light" ? styles.heading_light : styles.heading_dark}
-            accessibilityRole="header"
+            style={[
+              mode == "light" ? styles.heading_light : styles.heading_dark,
+              { fontSize: subtitleSize },
+            ]}
           >
             {Type}
           </Text>
@@ -86,11 +105,12 @@ function Service({ navigation, route }) {
                     }
                   >
                     <Text
-                      style={
+                      style={[
                         mode == "light"
                           ? styles.buttonText_light
-                          : styles.buttonText_dark
-                      }
+                          : styles.buttonText_dark,
+                        { fontSize: buttonSize },
+                      ]}
                     >
                       {item.name}
                     </Text>

@@ -28,16 +28,22 @@ function HomeScreen({ navigation }) {
   // get the current theme
 
   const theme = useSelector((state) => state.theme);
+  const fontSize = useSelector((state) => state.fontSize);
   // initialize action dispatcher
   const dispatch = useDispatch();
 
   // define a component mode state
   const [mode, setMode] = useState(theme.mode);
+  const [buttonSize, setButtonSize] = useState(fontSize.buttonSize);
 
   // Update the app Incase the theme mode changes
   useEffect(() => {
     setMode(theme.mode);
   }, [theme]);
+
+  useEffect(() => {
+    setButtonSize(fontSize.buttonSize);
+  }, [fontSize.buttonSize]);
 
   //const { onPress, title = 'Save' } = props;
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -86,9 +92,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               About VBIS
@@ -108,9 +112,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               Programs
@@ -132,9 +134,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               My Schedule
@@ -154,9 +154,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               VBIS Schedule{" "}
@@ -178,9 +176,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               Other Resources{" "}
@@ -200,9 +196,7 @@ function HomeScreen({ navigation }) {
           >
             <Text
               style={
-                mode == "light"
-                  ? styles.buttonText_light
-                  : styles.buttonText_dark
+                [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
               }
             >
               {" "}
@@ -230,7 +224,7 @@ function HomeScreen({ navigation }) {
         >
           <Text
             style={
-              mode == "light" ? styles.buttonText_light : styles.buttonText_dark
+              [mode == "light" ? styles.buttonText_light : styles.buttonText_dark, {fontSize: buttonSize}]
             }
           >
             Contact VBIS{" "}
