@@ -15,7 +15,6 @@ import Footer from "../Components/Footer";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { getDatabase, ref, get, child } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
