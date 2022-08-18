@@ -23,25 +23,6 @@ import {
 } from "../redux-store/fontConstants";
 // actions
 import { switchMode } from "../redux-store/actions";
-//Radio Group
-import RadioGroup from "react-native-radio-buttons-group";
-
-const radioButtonsData = [
-  {
-    id: "0", // acts as primary key, should be unique and non-empty string
-    label: "Light Mode",
-    selected: "true",
-    color: "black",
-    labelStyle: {
-      marginRight: 60,
-    },
-  },
-  {
-    id: "1",
-    label: "Dark Mode",
-    color: "black",
-  },
-];
 
 function VbisSchedule({ navigation }) {
   // get the current theme & font size
