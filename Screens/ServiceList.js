@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
 
-const aboutRef = ref(getDatabase(), "about");
 
 function Service({ navigation, route }) {
   // get the current theme
