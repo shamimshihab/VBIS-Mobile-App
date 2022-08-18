@@ -20,7 +20,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { styles } from "../style/styles";
 
-const aboutRef = ref(getDatabase(), "about");
 
 function ServiceDescription({ navigation, route }) {
   // get the current theme & font size
