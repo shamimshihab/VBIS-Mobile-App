@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   StyleSheet,
+  Dimensions,
   Text,
   View,
   Button,
@@ -8,6 +9,8 @@ import {
   Pressable,
   Image,
 } from "react-native";
+
+const { width, height } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
   appContainer_light: {
@@ -188,7 +191,7 @@ export const styles = StyleSheet.create({
 
   bottomContainer: {
     flexDirection: "row",
-    height: "15%",
+    height: "16%",
     backgroundColor: "",
     alignItems: "center",
     justifyContent: "center",
@@ -208,28 +211,14 @@ export const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 7.5,
   },
-  bottomButton: {
-    marginTop: 20,
-    marginRight: 30,
-    marginLeft: 30,
-    flexDirection: "row",
-    width: 120,
-    height: 62,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#d3d3d3",
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 7.5,
-  },
+
   bottomButton_light: {
-    marginTop: 20,
+    marginTop: 50,
     marginRight: 30,
     marginLeft: 30,
     flexDirection: "row",
-    width: 120,
-    height: 62,
+    width: 110,
+    height: 58,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
@@ -239,7 +228,7 @@ export const styles = StyleSheet.create({
     borderRadius: 7.5,
   },
   bottomButton_dark: {
-    marginTop: 20,
+    marginTop: 50,
     marginRight: 30,
     marginLeft: 30,
     flexDirection: "row",
@@ -423,6 +412,11 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  photoThemeChange: {
+    flexDirection: "row",
+    marginRight: 80,
+  },
+
   themeChangeButton_light: {
     marginTop: 20,
     marginRight: 30,
@@ -534,11 +528,11 @@ export const styles = StyleSheet.create({
 
   /*Programs Page*/
   scrollViewProgramPage: {
-    height: 500,
+    height: height * 0.6,
   },
   itemButton_light: {
     marginTop: 20,
-    width: 330,
+    width: 310,
     height: "auto",
     alignItems: "center",
     justifyContent: "center",
@@ -549,7 +543,7 @@ export const styles = StyleSheet.create({
   },
   itemButton_dark: {
     marginTop: 20,
-    width: 330,
+    width: 310,
     height: "auto",
     alignItems: "center",
     justifyContent: "center",
@@ -588,5 +582,32 @@ export const styles = StyleSheet.create({
     textAlign: "justify",
     padding: 10,
     color: "white",
+  },
+
+  /*Other Resources Page*/
+
+  scrollViewOtherResourcePage: {
+    height: height * 0.6,
+  },
+
+  otherResourcesBodyText_light: {
+    fontSize: 20,
+    textAlign: "justify",
+    padding: 10,
+    fontWeight: "400",
+    color: "#000000",
+  },
+  otherResourcesBodyText_dark: {
+    fontSize: 20,
+    textAlign: "left",
+    padding: 10,
+    fontWeight: "400",
+    color: "white",
+  },
+
+  /* Service List Page*/
+
+  scrollViewServiceList: {
+    height: height * 0.6,
   },
 });

@@ -24,6 +24,8 @@ import Settings from "./Screens/Settings";
 import Tutorial from "./Screens/Tutorial";
 import Course from "./Screens/Course.js";
 import Staff from "./Screens/Staff";
+import ServiceList from "./Screens/ServiceList";
+import ServiceDescription from "./Screens/ServiceDescription";
 
 // Redux for Theme
 import { Provider } from "react-redux";
@@ -56,6 +58,12 @@ function App() {
           <Stack.Screen name="Tutorial" component={Tutorial} />
           <Stack.Screen name="COURSE" component={Course} />
           <Stack.Screen name="Staff" component={Staff} />
+          <Stack.Screen name="ServiceList" component={ServiceList} />
+
+          <Stack.Screen
+            name="ServiceDescription"
+            component={ServiceDescription}
+          />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

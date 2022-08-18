@@ -10,22 +10,18 @@ import {
   SafeAreaView,
   ScrollView,
 } from "react-native";
-
 import TopHeader from "../Components/TopHeader";
 import Footer from "../Components/Footer";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-
 import { styles } from "../style/styles";
-import ServiceList from "./ServiceList";
-import {
-  resourceCategoryList,
-  resourceDescription,
-} from "../Database/firebase.js";
 
-function OtherResources({ navigation }) {
-  // get the current theme & font size
+
+function Service({ navigation, route }) {
+  // get the current theme
 
   const theme = useSelector((state) => state.theme);
   const fontSize = useSelector((state) => state.fontSize);
@@ -47,19 +43,16 @@ function OtherResources({ navigation }) {
     setButtonSize(fontSize.buttonSize);
   }, [fontSize]);
 
-  useEffect(() => {
-    setSubtitleSize(fontSize.subtitleSize);
-  }, [fontSize]);
+  const { Service } = route.params;
+  const { Type } = route.params;
 
-  useEffect(() => {
-    setBodySize(fontSize.bodySize);
-  }, [fontSize]);
   return (
     <View
       style={
         mode == "light" ? styles.appContainer_light : styles.appContainer_dark
       }
     >
+      {/* Top Header(VBIS logo, Settings, Tuitorial)*/}
       <View style={styles.headerContainer}>
         <TopHeader navigation={navigation} />
       </View>
@@ -73,27 +66,13 @@ function OtherResources({ navigation }) {
               { fontSize: subtitleSize },
             ]}
           >
-            Other Resources
+            {Type}
           </Text>
           <SafeAreaView>
-            <ScrollView style={styles.scrollViewOtherResourcePage}>
-              {/* Description About Other Respurces*/}
-
-              <Text
-                style={[
-                  mode == "light"
-                    ? styles.otherResourcesBodyText_light
-                    : styles.otherResourcesBodyText_dark,
-                  { fontSize: bodySize },
-                ]}
-                accessibilityRole="text"
-              >
-                {resourceDescription}
-              </Text>
-
-              {resourceCategoryList.map((item) => (
+            <ScrollView style={styles.scrollViewServiceList}>
+              {Service.map((item) => (
                 <View
-                  key={item.key}
+                  key={item.name}
                   accessible={true}
                   accessibilityRole="button"
                   accessibilityLabel={item.name}
@@ -106,9 +85,11 @@ function OtherResources({ navigation }) {
                         : styles.itemButton_dark
                     }
                     onPress={() =>
-                      navigation.navigate("ServiceList", {
-                        Service: item.serviceList,
-                        Type: item.type,
+                      navigation.navigate("ServiceDescription", {
+                        Name: item.name,
+                        Description: item.description,
+                        Location: item.location,
+                        Phone: item.phone,
                       })
                     }
                   >
@@ -120,7 +101,7 @@ function OtherResources({ navigation }) {
                         { fontSize: buttonSize },
                       ]}
                     >
-                      {item.type}
+                      {item.name}
                     </Text>
                   </Pressable>
                 </View>
@@ -129,7 +110,7 @@ function OtherResources({ navigation }) {
           </SafeAreaView>
         </View>
       </View>
-
+      {/* Footer of the page(Back Button, Home Button)*/}
       <View style={styles.bottomContainer}>
         <Footer navigation={navigation} />
       </View>
@@ -137,4 +118,4 @@ function OtherResources({ navigation }) {
   );
 }
 
-export default OtherResources;
+export default Service;

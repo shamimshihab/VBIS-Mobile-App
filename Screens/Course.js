@@ -11,6 +11,8 @@ import {
   Alert,
   Pressable,
   Image,
+  SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
@@ -71,437 +73,586 @@ function Course({ navigation, route }) {
       <View style={styles.middleContainer}>
         <View>
           <Text
-            style={
-              [mode == "light" ? styles.heading_light : styles.heading_dark, {fontSize: subtitleSize}]
-            }
+            style={[
+              mode == "light" ? styles.heading_light : styles.heading_dark,
+              { fontSize: subtitleSize },
+            ]}
           >
             {" "}
             {ID}{" "}
           </Text>
-          <Text
-            style={
-              [mode == "light" ? styles.subtitle_light : styles.subtitle_dark, {fontSize: subtitleSize}]
-            }
-          >
-            Schedule
-          </Text>
+          <SafeAreaView>
+            <ScrollView style={styles.scrollViewServiceList}>
+              <Text
+                style={[
+                  mode == "light"
+                    ? styles.subtitle_light
+                    : styles.subtitle_dark,
+                  { fontSize: subtitleSize },
+                ]}
+              >
+                Schedule
+              </Text>
 
-          <Text
-            style={
-              [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-            }
-          >
-            {Online ? (
-              <Text>Offered Online</Text>
-            ) : (
-              <Text>Offered in Person</Text>
-            )}
-          </Text>
-          {Monday ? (
-            <Text
-              style={
-                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-              }
-            >
-              Monday
-              {StartTime != null ? (
+              <Text
+                style={[
+                  mode == "light"
+                    ? styles.bodyTextCoursePage_light
+                    : styles.bodyTextCoursePage_dark,
+                  { fontSize: bodySize },
+                ]}
+              >
+                {Online ? (
+                  <Text>Offered Online</Text>
+                ) : (
+                  <Text>Offered in Person</Text>
+                )}
+              </Text>
+              {Monday ? (
                 <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
+                  style={[
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark,
+                    { fontSize: bodySize },
+                  ]}
                 >
-                  {StartTime < 12 ? (
+                  Monday
+                  {StartTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}AM
+                      {StartTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}AM
+                        </Text>
+                      ) : StartTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : StartTime === 12 ? (
+                  ) : null}
+                  -
+                  {EndTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}PM
+                      {EndTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}AM
+                        </Text>
+                      ) : EndTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime - 12}PM
-                    </Text>
-                  )}
+                  ) : null}
                 </Text>
               ) : null}
-              -
-              {EndTime != null ? (
+              {Tuesday ? (
                 <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
+                  style={[
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark,
+                    { fontSize: bodySize },
+                  ]}
                 >
-                  {EndTime < 12 ? (
+                  Tuesday
+                  {StartTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {EndTime}AM
+                      {StartTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}AM
+                        </Text>
+                      ) : StartTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : EndTime === 12 ? (
+                  ) : null}
+                  -
+                  {EndTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {EndTime}PM
+                      {EndTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}AM
+                        </Text>
+                      ) : EndTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime - 12}PM
-                    </Text>
-                  )}
+                  ) : null}
                 </Text>
               ) : null}
-            </Text>
-          ) : null}
-          {Tuesday ? (
-            <Text
-              style={
-                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-              }
-            >
-              Tuesday
-              {StartTime != null ? (
+              {Wednesday ? (
                 <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
+                  style={[
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark,
+                    { fontSize: bodySize },
+                  ]}
                 >
-                  {StartTime < 12 ? (
+                  Wednesday
+                  {StartTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}AM
+                      {StartTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}AM
+                        </Text>
+                      ) : StartTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          sstyle={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : StartTime === 12 ? (
+                  ) : null}
+                  -
+                  {EndTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}PM
+                      {EndTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}AM
+                        </Text>
+                      ) : EndTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime - 12}PM
-                    </Text>
-                  )}
+                  ) : null}
                 </Text>
               ) : null}
-              -
-              {EndTime != null ? (
+              {Thursday ? (
                 <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
+                  style={[
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark,
+                    { fontSize: bodySize },
+                  ]}
                 >
-                  {EndTime < 12 ? (
+                  Thursday
+                  {StartTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {EndTime}AM
+                      {StartTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}AM
+                        </Text>
+                      ) : StartTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : EndTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}PM
+                  ) : null}
+                  -
+                  {EndTime != null ? (
+                    <Text style={styles.bodyText}>
+                      {EndTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}AM
+                        </Text>
+                      ) : EndTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime - 12}PM
-                    </Text>
-                  )}
+                  ) : null}
                 </Text>
               ) : null}
-            </Text>
-          ) : null}
-          {Wednesday ? (
-            <Text
-              style={
-                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-              }
-            >
-              Wednesday
-              {StartTime != null ? (
+              {Friday ? (
                 <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
+                  style={[
+                    mode == "light"
+                      ? styles.bodyTextCoursePage_light
+                      : styles.bodyTextCoursePage_dark,
+                    { fontSize: bodySize },
+                  ]}
                 >
-                  {StartTime < 12 ? (
+                  Friday
+                  {StartTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}AM
+                      {StartTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}AM
+                        </Text>
+                      ) : StartTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {" "}
+                          {StartTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : StartTime === 12 ? (
+                  ) : null}
+                  -
+                  {EndTime != null ? (
                     <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
+                      style={[
+                        mode == "light"
+                          ? styles.bodyTextCoursePage_light
+                          : styles.bodyTextCoursePage_dark,
+                        { fontSize: bodySize },
+                      ]}
                     >
-                      {" "}
-                      {StartTime}PM
+                      {EndTime < 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}AM
+                        </Text>
+                      ) : EndTime === 12 ? (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime}PM
+                        </Text>
+                      ) : (
+                        <Text
+                          style={[
+                            mode == "light"
+                              ? styles.bodyTextCoursePage_light
+                              : styles.bodyTextCoursePage_dark,
+                            { fontSize: bodySize },
+                          ]}
+                        >
+                          {EndTime - 12}PM
+                        </Text>
+                      )}
                     </Text>
-                  ) : (
-                    <Text
-                      sstyle={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime - 12}PM
-                    </Text>
-                  )}
+                  ) : null}
                 </Text>
               ) : null}
-              -
-              {EndTime != null ? (
-                <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
-                >
-                  {EndTime < 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}AM
-                    </Text>
-                  ) : EndTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}PM
-                    </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime - 12}PM
-                    </Text>
-                  )}
-                </Text>
-              ) : null}
-            </Text>
-          ) : null}
-          {Thursday ? (
-            <Text
-              style={
-                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-              }
-            >
-              Thursday
-              {StartTime != null ? (
-                <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
-                >
-                  {StartTime < 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime}AM
-                    </Text>
-                  ) : StartTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime}PM
-                    </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime - 12}PM
-                    </Text>
-                  )}
-                </Text>
-              ) : null}
-              -
-              {EndTime != null ? (
-                <Text style={styles.bodyText}>
-                  {EndTime < 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}AM
-                    </Text>
-                  ) : EndTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}PM
-                    </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime - 12}PM
-                    </Text>
-                  )}
-                </Text>
-              ) : null}
-            </Text>
-          ) : null}
-          {Friday ? (
-            <Text
-              style={
-                [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-              }
-            >
-              Friday
-              {StartTime != null ? (
-                <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
-                >
-                  {StartTime < 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime}AM
-                    </Text>
-                  ) : StartTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime}PM
-                    </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {" "}
-                      {StartTime - 12}PM
-                    </Text>
-                  )}
-                </Text>
-              ) : null}
-              -
-              {EndTime != null ? (
-                <Text
-                  style={
-                    [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                  }
-                >
-                  {EndTime < 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}AM
-                    </Text>
-                  ) : EndTime === 12 ? (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime}PM
-                    </Text>
-                  ) : (
-                    <Text
-                      style={
-                        [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-                      }
-                    >
-                      {EndTime - 12}PM
-                    </Text>
-                  )}
-                </Text>
-              ) : null}
-            </Text>
-          ) : null}
-          <Text
-            style={
-              [mode == "light" ? styles.subtitle_light : styles.subtitle_dark, {fontSize: subtitleSize}]
-            }
-          >
-            Information
-          </Text>
-          <Text
-            style={
-              [mode == "light" ? styles.bodyTextCoursePage_light : styles.bodyTextCoursePage_dark, {fontSize: bodySize}]
-            }
-          >
-            {Desc}
-          </Text>
+              <Text
+                style={[
+                  mode == "light"
+                    ? styles.subtitle_light
+                    : styles.subtitle_dark,
+                  { fontSize: subtitleSize },
+                ]}
+              >
+                Information
+              </Text>
+              <Text
+                style={[
+                  mode == "light"
+                    ? styles.bodyTextCoursePage_light
+                    : styles.bodyTextCoursePage_dark,
+                  { fontSize: bodySize },
+                ]}
+              >
+                {Desc}
+              </Text>
+            </ScrollView>
+          </SafeAreaView>
         </View>
       </View>
 
